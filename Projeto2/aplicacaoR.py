@@ -18,7 +18,7 @@ import time
 #   python3 -m serial.tools.list_ports
 
 #serialName = "/dev/ttyACM0"           # Ubuntu (variacao de)
-serialName = "/dev/cu.usbmodem143101" # Mac    (variacao de)
+serialName = "/dev/cu.usbmodem145101" # Mac    (variacao de)
 #serialName = "COM5"                  # Windows(variacao de)
 print("abriu com")
 
