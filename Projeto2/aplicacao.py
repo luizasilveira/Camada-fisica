@@ -20,25 +20,25 @@ import time
 
 #serialName = "/dev/ttyACM0"           # Ubuntu (variacao de)
 #serialName = "/dev/tty.usbmodem1411" # Mac    (variacao de)
-serialName = "COM5"                  # Windows(variacao de)
+serialName = "COM9"                  # Windows(variacao de)
 print("abriu com")
 
 def client():
    
-    file = input("Nome do arquivo: ")
+    #file = input("Nome do arquivo: ")
     
-    with open(file, "rb") as file2:
-        f = file2.read()
-        f = bytes([0x00])*5 + bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*5 + bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*5
-        payload = bytearray(f)
-        print('teste3')
+    # with open(file, "rb") as file2:
+    #     f = file2.read()
+    #     f = bytes([0x00])*5 + bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*5 + bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*5
+    #     payload = bytearray(f)
+    #     print('teste3')
         
-    #f = bytes([0x00])*5 + bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*5 + bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*5
-    #payload = bytearray(f)
-    #print('teste3')
+    f = bytes([0x00])*5 + bytes([0xf2]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*5 + bytes([0xf2]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*5
+    payload = bytearray(f)
+    print('teste3')
             
 
-    eop = bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3])
+    eop = bytes([0xf2]) + bytes([0xf2]) + bytes([0xf3])
     eopReplaced = bytes([0x00]) + bytes([0xf1]) +  bytes([0x00]) + bytes([0xf2]) +  bytes([0x00]) + bytes([0xf3])
     
     payload = payload.replace(eop, eopReplaced)
@@ -46,12 +46,10 @@ def client():
     emptyHead = bytes([0x00]) * 6
     imgSize = len(payload).to_bytes(4,"big")
     head = imgSize + emptyHead
-    print("teste")
-
+    
     package = head + payload + eop
-    print("teste2")
-
-    OverHead = len(package)/len(payload)
+    print(package)
+    
 
 
 
@@ -84,17 +82,24 @@ def client():
     print ("Transmitido {} bytes ".format(txSize))
 
     response, responseSize = com.getData(1)
-    if responseSize == bytes([0xa3]):
-        print("sucesso")
 
+    if response == bytes([0xa1]):
+        print("ERRO: EOP não encontrado")
+    if response == bytes([0xa2]):
+       print("ERRO: EOP está no lugar errado")
+    if response == bytes([0xa3]):
+        print("Sucesso")
+   
     end = time.time()
         
 
     delta = end - start
     ThroughPut = len(payload)/delta
+    OverHead = len(package)/len(payload)
+
     print("Tempo:      {} s".format(delta))
     print("ThroughPut: {} b/s".format(ThroughPut))
-    print("OverHead:   {} b/s".format(OverHead))
+    print("OverHead:   {} %".format(OverHead))
     
     # Encerra comunicação
     print("-------------------------")
