@@ -15,10 +15,10 @@ import time
 
 # Serial Com Port
 #   para saber a sua porta, execute no terminal :
-#   python -m serial.tools.list_ports
+#   python3 -m serial.tools.list_ports
 
 #serialName = "/dev/ttyACM0"           # Ubuntu (variacao de)
-serialName = "/dev/cu.usbmodem145201" # Mac    (variacao de)
+serialName = "/dev/cu.usbmodem143101" # Mac    (variacao de)
 #serialName = "COM5"                  # Windows(variacao de)
 print("abriu com")
 
@@ -37,16 +37,20 @@ def server():
 
     # Faz a recepção dos dados
     print ("Recebendo dados .... ")
+
     while True:
+
         eop = bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3])
         eopReplaced = bytes([0x00]) + bytes([0xf1]) +  bytes([0x00]) + bytes([0xf2]) +  bytes([0x00]) + bytes([0xf3])
 
         head, headSize = com.getData(10)
     
         fileSize = int.from_bytes(head[:4], "big")
+        #print(fileSize)
         
         payloadEop, payloadEopSize = com.getData(int(fileSize) + len(eop))
 
+        #print(payloadEopSize)
         print(payloadEop)
 
         if eop in payloadEop:
@@ -58,21 +62,24 @@ def server():
                 print("ERRO: EOP está no lugar errado")
                 com.sendData(bytes([0xa2]))
                 print ("Transmitido {} bytes ".format(1))
+                continue
         
         else: 
             print("ERRO: EOP não encontrado")
             com.sendData(bytes([0xa1]))
             print ("Transmitido {} bytes ".format(1))
             continue
-
         
         payload = payload.replace(eopReplaced, eop)
 
         print(payload)
+        #print(len(payload))
 
         payloadSize = len(payload)
 
-        if payloadSize == fileSize:
+        sizeReceived = payloadEopSize - len(eop)
+
+        if sizeReceived == fileSize:
             print("Sucesso")
             com.sendData(bytes([0xa3]))
             print ("Transmitido {} bytes ".format(1))
@@ -83,7 +90,9 @@ def server():
         print ("Recebidos {} bytes ".format(headSize + payloadEopSize))
 
         while(com.tx.getIsBussy()):
-           pass
+            pass
+
+        #break
 
     # Encerra comunicação
     print("-------------------------")

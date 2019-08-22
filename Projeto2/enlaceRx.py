@@ -99,7 +99,9 @@ class RX(object):
         """
 
         while(self.getBufferLen() < size):
-            time.sleep(0.001)
+        	#print("tesperando {}".format(size))
+        	#print("tamanho disponivel no buffer {}".format(self.getBufferLen()))
+        	time.sleep(0.5)
 #                 
         return(self.getBuffer(size))
 
