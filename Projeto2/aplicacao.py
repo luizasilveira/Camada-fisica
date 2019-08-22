@@ -33,12 +33,12 @@ def client():
     #     payload = bytearray(f)
     #     print('teste3')
         
-    f = bytes([0x00])*5 + bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*5 + bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*5
+    f = bytes([0x00])*5 + bytes([0xf2]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*5 + bytes([0xf2]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*5
     payload = bytearray(f)
     print('teste3')
             
 
-    eop = bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3])
+    eop = bytes([0xf2]) + bytes([0xf2]) + bytes([0xf3])
     eopReplaced = bytes([0x00]) + bytes([0xf1]) +  bytes([0x00]) + bytes([0xf2]) +  bytes([0x00]) + bytes([0xf3])
     
     payload = payload.replace(eop, eopReplaced)
@@ -48,6 +48,7 @@ def client():
     head = imgSize + emptyHead
     
     package = head + payload + eop
+    print(package)
     
 
 
