@@ -32,30 +32,30 @@ def client():
     #     f = bytes([0x00])*5 + bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*5 + bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*5
     #     payload = bytearray(f)
     #     print('teste3')
+
+
         
-    f = bytes([0x00])*45 + bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*45 + bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*45
-    payload = bytearray(f)
+    payload = bytes([0x00])*45 + bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*45 + bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*45
     eop = bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3])
     eopReplaced = bytes([0x00]) + bytes([0xf1]) +  bytes([0x00]) + bytes([0xf2]) +  bytes([0x00]) + bytes([0xf3])
-    
-
-    eachPayload = [f[x:x+128] for x in range(0, len(f), 128)]
- 
+    payloadReplaced =  payload.replace(eop, eopReplaced)
+   
+    eachPayload = [payloadReplaced[x:x+128] for x in range(0, len(payloadReplaced), 128)]
     totalPackage = len(eachPayload).to_bytes(2,"big")
     numberPackage = 0
     emptyHead =  bytes([0x00]) * 3
-    
-    
+   
     for payloadS in eachPayload:
         numberPackage += 1
         payloadSize = len(payloadS).to_bytes(4,"big")
         numberPackageB = numberPackage.to_bytes(1,"big")
        
-        head = numberPackageB + totalPackage + payloadSize + emptyHead
-        package = head + payloadS + eop
-        
-        payload =  payload.replace(eop, eopReplaced)
+        #head = nP(1byte) + tP(2bytes) + eH(3bytes) + pS(4bytes) = 10bytes
+        head = numberPackageB + totalPackage + emptyHead + payloadSize 
 
+        #package = head(10bytes) + payload(max 128bytes) + eop(3bytes)
+        package = head + payloadS + eop
+    
         # Inicializa enlace ... variavel com possui todos os metodos e propriedades do enlace, que funciona em threading
         com = enlace(serialName) # repare que o metodo construtor recebe um string (nome)
         # Ativa comunicacao

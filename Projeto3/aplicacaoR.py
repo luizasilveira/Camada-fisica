@@ -18,8 +18,8 @@ import time
 #   python3 -m serial.tools.list_ports
 
 #serialName = "/dev/ttyACM0"           # Ubuntu (variacao de)
-serialName = "/dev/cu.usbmodem145101" # Mac    (variacao de)
-#serialName = "COM5"                  # Windows(variacao de)
+# serialName = "/dev/cu.usbmodem145101" # Mac    (variacao de)
+serialName = "COM9"                  # Windows(variacao de)
 print("abriu com")
 
 def server():
@@ -44,14 +44,12 @@ def server():
         eopReplaced = bytes([0x00]) + bytes([0xf1]) +  bytes([0x00]) + bytes([0xf2]) +  bytes([0x00]) + bytes([0xf3])
 
         head, headSize = com.getData(10)
-    
-        fileSize = int.from_bytes(head[:4], "big")
-        #print(fileSize)
+
+        packageNumber = int.from_bytes(head[:1], "big")
+        totalPackage = int.from_bytes(head[1:3], "big")
+        fileSize = int.from_bytes(head[6:], "big")
         
         payloadEop, payloadEopSize = com.getData(int(fileSize) + len(eop))
-
-        #print(payloadEopSize)
-        print(payloadEop)
 
         if eop in payloadEop:
             i = payloadEop.find(eop)
@@ -72,9 +70,6 @@ def server():
         
         payload = payload.replace(eopReplaced, eop)
 
-        print(payload)
-        #print(len(payload))
-
         payloadSize = len(payload)
 
         sizeReceived = payloadEopSize - len(eop)
@@ -92,13 +87,13 @@ def server():
         while(com.tx.getIsBussy()):
             pass
 
-        #break
 
     # Encerra comunicação
     print("-------------------------")
     print("Comunicação encerrada")
     print("-------------------------")
     com.disable()
+
 
     #so roda o main quando for executado do terminal ... se for chamado dentro de outro modulo nao roda
 if __name__ == "__main__":
