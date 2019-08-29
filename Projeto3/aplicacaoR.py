@@ -19,7 +19,7 @@ import time
 
 #serialName = "/dev/ttyACM0"           # Ubuntu (variacao de)
 # serialName = "/dev/cu.usbmodem145101" # Mac    (variacao de)
-serialName = "COM9"                  # Windows(variacao de)
+serialName = "COM5"                  # Windows(variacao de)
 print("abriu com")
 
 def server():
@@ -28,32 +28,36 @@ def server():
     # Ativa comunicacao
     com.enable()
 
-    # Log
+     # Log
     print("-------------------------")
     print("Comunicação inicializada")
     print("  porta : {}".format(com.fisica.name))
     print("-------------------------")
     
-
     # Faz a recepção dos dados
     print ("Recebendo dados .... ")
 
-    while True:
+    stop = False
+    bufferReceived = bytearray()
+    while not stop:
 
         eop = bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3])
         eopReplaced = bytes([0x00]) + bytes([0xf1]) +  bytes([0x00]) + bytes([0xf2]) +  bytes([0x00]) + bytes([0xf3])
 
         head, headSize = com.getData(10)
 
-        packageNumber = int.from_bytes(head[:1], "big")
-        totalPackage = int.from_bytes(head[1:3], "big")
-        fileSize = int.from_bytes(head[6:], "big")
-        
-        payloadEop, payloadEopSize = com.getData(int(fileSize) + len(eop))
+        packageNumber = int.from_bytes(head[:3], "little")
+        print ("Numero do pacote {}".format(packageNumber))
+        totalPackage = int.from_bytes(head[3:6], "little")
+        print ("Numero total de pacotes {}".format(totalPackage))
+        payloadSize = int.from_bytes(head[9:], "little")
+        print ("Tamnaho do payload {}".format(payloadSize))
 
+        payloadEop, payloadEopSize = com.getData(int(payloadSize) + len(eop))
         if eop in payloadEop:
             i = payloadEop.find(eop)
             payload = payloadEop[:i]
+            bufferReceived += payload
             print("EOP na posicão {}".format(i))
 
             if eop != payloadEop[i:]:
@@ -74,19 +78,18 @@ def server():
 
         sizeReceived = payloadEopSize - len(eop)
 
-        if sizeReceived == fileSize:
+        if sizeReceived == payloadSize:
             print("Sucesso")
             com.sendData(bytes([0xa3]))
             print ("Transmitido {} bytes ".format(1))
     
-        # with open("teste.jpg", "wb") as img:
-        #    img.write(payload)
-
         print ("Recebidos {} bytes ".format(headSize + payloadEopSize))
+        print(" ")
 
-        while(com.tx.getIsBussy()):
-            pass
-
+        if packageNumber == totalPackage:
+            with open("testeee.jpg", "wb") as img:
+                img.write(bufferReceived)
+            stop = True
 
     # Encerra comunicação
     print("-------------------------")
