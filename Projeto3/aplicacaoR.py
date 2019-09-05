@@ -19,7 +19,7 @@ import time
 
 #serialName = "/dev/ttyACM0"           # Ubuntu (variacao de)
 # serialName = "/dev/cu.usbmodem145101" # Mac    (variacao de)
-serialName = "COM5"                  # Windows(variacao de)
+serialName = "/dev/cu.usbmodem146201"                  # Windows(variacao de)
 print("abriu com")
 
 def server():
@@ -62,14 +62,14 @@ def server():
 
             if eop != payloadEop[i:]:
                 print("ERRO: EOP está no lugar errado")
-                com.sendData(bytes([0xa2]))
-                print ("Transmitido {} bytes ".format(1))
+                #com.sendData(bytes([0xa2]))
+                #print ("Transmitido {} bytes ".format(1))
                 continue
         
         else: 
             print("ERRO: EOP não encontrado")
-            com.sendData(bytes([0xa1]))
-            print ("Transmitido {} bytes ".format(1))
+            #com.sendData(bytes([0xa1]))
+            #print ("Transmitido {} bytes ".format(1))
             continue
         
         payload = payload.replace(eopReplaced, eop)
@@ -80,8 +80,8 @@ def server():
 
         if sizeReceived == payloadSize:
             print("Sucesso")
-            com.sendData(bytes([0xa3]))
-            print ("Transmitido {} bytes ".format(1))
+            #com.sendData(bytes([0xa3]))
+            #print ("Transmitido {} bytes ".format(1))
     
         print ("Recebidos {} bytes ".format(headSize + payloadEopSize))
         print(" ")
