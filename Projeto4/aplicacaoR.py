@@ -12,14 +12,50 @@ print("comecou")
 from enlace import *
 import time
 
+def eop():
+
+    eop = bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3])
+    return eop 
+
+def eopReplaced():
+
+    emptyPayload = bytes([0x00])*1
+
+    eopReplaced = bytes([0x00]) + bytes([0xf1]) +  bytes([0x00]) + bytes([0xf2]) +  bytes([0x00]) + bytes([0xf3])
+
+    emptyPayloadReplaced =  emptyPayload.replace(eop(), eopReplaced)
+
+    return emptyPayloadReplaced
+
+def allpayloads():
+     eachPayloadmsg = [eopReplaced()[x:x+128] for x in range(0, len(eopReplaced()), 128)]
+
+     return eachPayloadmsg
+
+def message2():
+
+    messageNumber = bytes([0x02])
+
+    for payloadS in allpayloads():
+        payloadSize = len(payloadS).to_bytes(1,"little")
+        print(payloadSize)
+
+    emptyhead = bytes([0x00])*8
+    head = messageNumber + payloadSize + emptyhead
+    package = head + payloadS + eop()
+
+    return package
+
+print(message2)
+
 
 # Serial Com Port
 #   para saber a sua porta, execute no terminal :
 #   python3 -m serial.tools.list_ports
 
 #serialName = "/dev/ttyACM0"           # Ubuntu (variacao de)
-# serialName = "/dev/cu.usbmodem145101" # Mac    (variacao de)
-serialName = "COM5"                  # Windows(variacao de)
+serialName = "/dev/cu.usbmodem143101" # Mac    (variacao de)
+# serialName = "COM5"                  # Windows(variacao de)
 print("abriu com")
 
 def server():
@@ -37,21 +73,37 @@ def server():
     # Faz a recepção dos dados
     print ("Recebendo dados .... ")
 
-    stop = False
+    ocioso = False
     bufferReceived = bytearray()
-    while not stop:
-
-        eop = bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3])
-        eopReplaced = bytes([0x00]) + bytes([0xf1]) +  bytes([0x00]) + bytes([0xf2]) +  bytes([0x00]) + bytes([0xf3])
+    while not ocioso:
 
         head, headSize = com.getData(10)
 
-        packageNumber = int.from_bytes(head[:3], "little")
-        print ("Numero do pacote {}".format(packageNumber))
-        totalPackage = int.from_bytes(head[3:6], "little")
+        serverNumber = 147
+
+        messageNumber = int.from_bytes(head[:1], "little")
+        print ("Numero do pacote {}".format(messageNumber))
+
+        serverNumberR = int.from_bytes(head[1:2], "little")
+        print ("Numero do Servidor {}".format(serverNumberR))
+
+        totalPackage = int.from_bytes(head[2:5], "little")
         print ("Numero total de pacotes {}".format(totalPackage))
-        payloadSize = int.from_bytes(head[9:], "little")
+
+        payloadSize = int.from_bytes(head[5:6], "little")
         print ("Tamnaho do payload {}".format(payloadSize))
+        
+        if serverNumberR == serverNumber:
+            com.sendData(message2())
+            ocioso = True
+            print("ok")
+            time.sleep(1)
+
+        else:
+            ocioso = False
+
+
+
 
         payloadEop, payloadEopSize = com.getData(int(payloadSize) + len(eop))
         if eop in payloadEop:
@@ -86,10 +138,10 @@ def server():
         print ("Recebidos {} bytes ".format(headSize + payloadEopSize))
         print(" ")
 
-        if packageNumber == totalPackage:
-            with open("testeee.jpg", "wb") as img:
-                img.write(bufferReceived)
-            stop = True
+        # if packageNumber == totalPackage:
+        #     with open("testeee.jpg", "wb") as img:
+        #         img.write(bufferReceived)
+        #     # stop = True
 
     # Encerra comunicação
     print("-------------------------")
