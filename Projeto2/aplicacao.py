@@ -20,7 +20,7 @@ import time
 
 #serialName = "/dev/ttyACM0"           # Ubuntu (variacao de)
 #serialName = "/dev/tty.usbmodem1411" # Mac    (variacao de)
-serialName = "COM9"                  # Windows(variacao de)
+serialName = "COM5"                  # Windows(variacao de)
 print("abriu com")
 
 def client():
@@ -33,7 +33,7 @@ def client():
     #     payload = bytearray(f)
     #     print('teste3')
         
-    f = bytes([0x00])*5 + bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*5 + bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*5
+    f = bytes([0x00])*40 + bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*40 + bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*40
     payload = bytearray(f)
     print('teste3')
             
@@ -41,7 +41,7 @@ def client():
     eop = bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3])
     eopReplaced = bytes([0x00]) + bytes([0xf1]) +  bytes([0x00]) + bytes([0xf2]) +  bytes([0x00]) + bytes([0xf3])
     
-    payload = eop + payload.replace(eop, eopReplaced)
+    payload = payload.replace(eop, eopReplaced)
 
     emptyHead = bytes([0x00]) * 6
     imgSize = len(payload).to_bytes(4,"big")
