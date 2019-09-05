@@ -20,8 +20,50 @@ import time
 
 #serialName = "/dev/ttyACM0"           # Ubuntu (variacao de)
 #serialName = "/dev/tty.usbmodem1411" # Mac    (variacao de)
-serialName = "COM9"                  # Windows(variacao de)
+serialName = "COM5"                  # Windows(variacao de)
 print("abriu com")
+
+def payload():
+
+    with open("image.png", "rb") as image:
+        payload = image.read()
+        payloadSize = bytes(str(len(payload)), "UTF-8")
+
+    return payloadSize
+
+def eopReplaced(payload):
+
+    eop = bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3])
+    eopReplaced = bytes([0x00]) + bytes([0xf1]) +  bytes([0x00]) + bytes([0xf2]) +  bytes([0x00]) + bytes([0xf3])
+    payloadReplaced =  payload.replace(eop, eopReplaced)
+
+    return payloadReplaced
+
+def allpayloads():
+     eachPayload = [eopReplaced()[x:x+128] for x in range(0, len(eopReplaced()), 128)]
+     return eachPayload
+
+
+def mensagem1():
+    
+    payload = bytes([0x00])
+    eopReplaced(payload)
+    totalPackage = len(allpayloads()).to_bytes(3,"little")
+    # numberPackage = 0
+    # emptyHead =  bytes([0x00]) * 3
+    messageNumber = bytes([0x01])
+    for payloadS in allpayloads():
+        payloadSize = len(payloadS).to_bytes(1,"little")
+
+    head = messageNumber + totalPackage + payloadSize
+    print(head)
+
+
+    
+
+
+
+
 
 def client():
    
@@ -33,22 +75,22 @@ def client():
     #     payload = bytearray(f)
     #     print('teste3')
     
-    with open("image.png", "rb") as image:
-        payload = image.read()
-        # imgBytes = bytearray(f)
-        imgSize = bytes(str(len(payload)), "UTF-8")
-        print(imgSize)
+    # with open("image.png", "rb") as image:
+    #     payload = image.read()
+    #     # imgBytes = bytearray(f)
+    #     imgSize = bytes(str(len(payload)), "UTF-8")
+    #     print(imgSize)
       
     
-    #payload = bytes([0x00])*45 + bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*45 + bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*45
-    eop = bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3])
-    eopReplaced = bytes([0x00]) + bytes([0xf1]) +  bytes([0x00]) + bytes([0xf2]) +  bytes([0x00]) + bytes([0xf3])
-    payloadReplaced =  payload.replace(eop, eopReplaced)
+    # #payload = bytes([0x00])*45 + bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*45 + bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*45
+    # eop = bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3])
+    # eopReplaced = bytes([0x00]) + bytes([0xf1]) +  bytes([0x00]) + bytes([0xf2]) +  bytes([0x00]) + bytes([0xf3])
+    # payloadReplaced =  payload.replace(eop, eopReplaced)
    
-    eachPayload = [payloadReplaced[x:x+128] for x in range(0, len(payloadReplaced), 128)]
-    totalPackage = len(eachPayload).to_bytes(3,"little")
-    numberPackage = 0
-    emptyHead =  bytes([0x00]) * 3
+    # eachPayload = [payloadReplaced[x:x+128] for x in range(0, len(payloadReplaced), 128)]
+    # totalPackage = len(eachPayload).to_bytes(3,"little")
+    # numberPackage = 0
+    # emptyHead =  bytes([0x00]) * 3
 
     # Inicializa enlace ... variavel com possui todos os metodos e propriedades do enlace, que funciona em threading
     com = enlace(serialName) # repare que o metodo construtor recebe um string (nome)
@@ -64,20 +106,11 @@ def client():
     for payloadS in eachPayload:
 
         numberPackage += 1
-        print(numberPackage)
-        print(" ")
         payloadSize = len(payloadS).to_bytes(1,"little")
-        print(len(payloadS))
-        print(" ")
         numberPackageB = numberPackage.to_bytes(3,"little")
-       
        
         #head = nP(3byte) + tP(3bytes) + eH(3bytes) + pS(1bytes) = 10bytes
         head = numberPackageB + totalPackage + emptyHead + payloadSize 
-        print(numberPackageB)
-        print(" ")
-        print(totalPackage)
-        print(" ")
 
         #package = head(10bytes) + payload(max 128bytes) + eop(3bytes)
         package = head + payloadS + eop
@@ -99,14 +132,14 @@ def client():
 
         print ("Transmitido {} bytes ".format(txSize))
 
-        response, responseSize = com.getData(1)
+        # response, responseSize = com.getData(1)
 
-        if response == bytes([0xa1]):
-            print("ERRO: EOP não encontrado")
-        if response == bytes([0xa2]):
-            print("ERRO: EOP está no lugar errado")
-        if response == bytes([0xa3]):
-            print("Sucesso")
+        # if response == bytes([0xa1]):
+        #     print("ERRO: EOP não encontrado")
+        # if response == bytes([0xa2]):
+        #     print("ERRO: EOP está no lugar errado")
+        # if response == bytes([0xa3]):
+        #     print("Sucesso")
     
         end = time.time()
             
@@ -118,7 +151,8 @@ def client():
         print("Tempo:      {} s".format(delta))
         print("ThroughPut: {} b/s".format(ThroughPut))
         print("OverHead:   {} %".format(OverHead))
-        
+        print(" ")
+         
     # Encerra comunicação
     print("-------------------------")
     print("Comunicação encerrada")

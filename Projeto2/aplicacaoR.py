@@ -18,8 +18,8 @@ import time
 #   python3 -m serial.tools.list_ports
 
 #serialName = "/dev/ttyACM0"           # Ubuntu (variacao de)
-serialName = "/dev/cu.usbmodem144101" # Mac    (variacao de)
-#serialName = "COM5"                  # Windows(variacao de)
+#serialName = "/dev/cu.usbmodem144101" # Mac    (variacao de)
+serialName = "COM9"                  # Windows(variacao de)
 print("abriu com")
 
 def server():
@@ -46,7 +46,7 @@ def server():
         head, headSize = com.getData(10)
     
         fileSize = int.from_bytes(head[:4], "big")
-        #print(fileSize)
+        print(fileSize)
         
         payloadEop, payloadEopSize = com.getData(int(fileSize) + len(eop))
 
