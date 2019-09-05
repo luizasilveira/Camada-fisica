@@ -20,7 +20,7 @@ import time
 
 #serialName = "/dev/ttyACM0"           # Ubuntu (variacao de)
 #serialName = "/dev/tty.usbmodem1411" # Mac    (variacao de)
-serialName = "COM5"                  # Windows(variacao de)
+serialName = "COM9"                  # Windows(variacao de)
 print("abriu com")
 
 def eop():
@@ -62,7 +62,7 @@ def message1():
     messageNumber = bytes([0x01])
     for payloadS in allpayloads()[0]:
         payloadSize = len(payloadS).to_bytes(1,"little")
-        print(payloadSize)
+    
 
     emptyhead = bytes([0x00])*4
     head = messageNumber + serverNumber + totalPackage + payloadSize + emptyhead
@@ -88,40 +88,34 @@ def client():
 
     # Transmite dado
     print("tentado transmitir .... {} bytes".format(len(message1())))
-    start = time.time()
-    com.sendData(message1())
 
-    #espera o fim da transmissão
-    while(com.tx.getIsBussy()):
-        pass
+    inicia = False
+    while not inicia :
 
-    # Atualiza dados da transmissão
-    txSize = com.tx.getStatus()
+        start = time.time()
+        com.sendData(message1())
 
-    print ("Transmitido {} bytes ".format(txSize))
+        #espera o fim da transmissão
+        while(com.tx.getIsBussy()):
+            pass
 
-        # response, responseSize = com.getData(1)
+        # Atualiza dados da transmissão
+        txSize = com.tx.getStatus()
 
-        # if response == bytes([0xa1]):
-        #     print("ERRO: EOP não encontrado")
-        # if response == bytes([0xa2]):
-        #     print("ERRO: EOP está no lugar errado")
-        # if response == bytes([0xa3]):
-        #     print("Sucesso")
-    
-        # end = time.time()
-            
+        print ("Transmitido {} bytes ".format(txSize))
+        time.sleep(5)
 
-        # delta = end - start
-        # ThroughPut = len(payload)/delta
-        # OverHead = len(package)/len(payload)
+        head, headsize = com.getData(10)
+        messageNumber = int.from_bytes(head[:1], "little")
+        print ("Numero da mensagem {}".format(messageNumber))
 
-        # print("Tempo:      {} s".format(delta))
-        # print("ThroughPut: {} b/s".format(ThroughPut))
-        # print("OverHead:   {} %".format(OverHead))
-        # print(" ")
-         
-    # Encerra comunicação
+        if messageNumber == 2:
+            inicia = True
+            print("esta certo")
+
+        else:
+            inicia = False
+
     print("-------------------------")
     print("Comunicação encerrada")
     print("-------------------------")
