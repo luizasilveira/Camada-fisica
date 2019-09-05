@@ -23,74 +23,54 @@ import time
 serialName = "COM5"                  # Windows(variacao de)
 print("abriu com")
 
-def payload():
+def eop():
 
+    eop = bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3])
+    return eop 
+
+def payload():
+    
     with open("image.png", "rb") as image:
         payload = image.read()
         payloadSize = bytes(str(len(payload)), "UTF-8")
 
-    return payloadSize
+    return payload
 
-def eopReplaced(payload):
+def eopReplaced():
 
-    eop = bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3])
+    emptyPayload = bytes([0x00])*1
+
     eopReplaced = bytes([0x00]) + bytes([0xf1]) +  bytes([0x00]) + bytes([0xf2]) +  bytes([0x00]) + bytes([0xf3])
-    payloadReplaced =  payload.replace(eop, eopReplaced)
 
-    return payloadReplaced
+    emptyPayloadReplaced =  emptyPayload.replace(eop(), eopReplaced)
+    payloadReplaced = payload().replace(eop(), eopReplaced)
+
+    return emptyPayloadReplaced, payloadReplaced
 
 def allpayloads():
-     eachPayload = [eopReplaced()[x:x+128] for x in range(0, len(eopReplaced()), 128)]
-     return eachPayload
+     eachPayloadmsg = [eopReplaced()[0][x:x+128] for x in range(0, len(eopReplaced()), 128)]
+     eachPayloadimg = [eopReplaced()[1][x:x+128] for x in range(0, len(eopReplaced()), 128)]
+
+     return eachPayloadmsg, eachPayloadimg
 
 
-def mensagem1():
-    
-    payload = bytes([0x00])
-    eopReplaced(payload)
-    totalPackage = len(allpayloads()).to_bytes(3,"little")
+def message1():
+    serverNumber = bytes([0x93])
+    totalPackage = len(allpayloads()[0]).to_bytes(3,"little")
     # numberPackage = 0
     # emptyHead =  bytes([0x00]) * 3
     messageNumber = bytes([0x01])
-    for payloadS in allpayloads():
+    for payloadS in allpayloads()[0]:
         payloadSize = len(payloadS).to_bytes(1,"little")
+        print(payloadSize)
 
-    head = messageNumber + totalPackage + payloadSize
-    print(head)
+    emptyhead = bytes([0x00])*4
+    head = messageNumber + serverNumber + totalPackage + payloadSize + emptyhead
+    package = head + payloadS + eop()
 
-
-    
-
-
-
-
+    return package
 
 def client():
-   
-    #file = input("Nome do arquivo: ")
-    
-    # with open(file, "rb") as file2:
-    #     f = file2.read()
-    #     f = bytes([0x00])*5 + bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*5 + bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*5
-    #     payload = bytearray(f)
-    #     print('teste3')
-    
-    # with open("image.png", "rb") as image:
-    #     payload = image.read()
-    #     # imgBytes = bytearray(f)
-    #     imgSize = bytes(str(len(payload)), "UTF-8")
-    #     print(imgSize)
-      
-    
-    # #payload = bytes([0x00])*45 + bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*45 + bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3]) + bytes([0x00])*45
-    # eop = bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3])
-    # eopReplaced = bytes([0x00]) + bytes([0xf1]) +  bytes([0x00]) + bytes([0xf2]) +  bytes([0x00]) + bytes([0xf3])
-    # payloadReplaced =  payload.replace(eop, eopReplaced)
-   
-    # eachPayload = [payloadReplaced[x:x+128] for x in range(0, len(payloadReplaced), 128)]
-    # totalPackage = len(eachPayload).to_bytes(3,"little")
-    # numberPackage = 0
-    # emptyHead =  bytes([0x00]) * 3
 
     # Inicializa enlace ... variavel com possui todos os metodos e propriedades do enlace, que funciona em threading
     com = enlace(serialName) # repare que o metodo construtor recebe um string (nome)
@@ -103,34 +83,22 @@ def client():
     print("  porta : {}".format(com.fisica.name))
     print("-------------------------")
    
-    for payloadS in eachPayload:
 
-        numberPackage += 1
-        payloadSize = len(payloadS).to_bytes(1,"little")
-        numberPackageB = numberPackage.to_bytes(3,"little")
-       
-        #head = nP(3byte) + tP(3bytes) + eH(3bytes) + pS(1bytes) = 10bytes
-        head = numberPackageB + totalPackage + emptyHead + payloadSize 
+    print ("gerando dados para transmissao :")
 
-        #package = head(10bytes) + payload(max 128bytes) + eop(3bytes)
-        package = head + payloadS + eop
-    
-        # Carrega dados
-        print ("gerando dados para transmissao :")
+    # Transmite dado
+    print("tentado transmitir .... {} bytes".format(len(message1())))
+    start = time.time()
+    com.sendData(message1())
 
-        # Transmite dado
-        print("tentado transmitir .... {} bytes".format(len(package)))
-        start = time.time()
-        com.sendData(package)
+    #espera o fim da transmissão
+    while(com.tx.getIsBussy()):
+        pass
 
-        #espera o fim da transmissão
-        while(com.tx.getIsBussy()):
-            pass
+    # Atualiza dados da transmissão
+    txSize = com.tx.getStatus()
 
-        # Atualiza dados da transmissão
-        txSize = com.tx.getStatus()
-
-        print ("Transmitido {} bytes ".format(txSize))
+    print ("Transmitido {} bytes ".format(txSize))
 
         # response, responseSize = com.getData(1)
 
@@ -141,17 +109,17 @@ def client():
         # if response == bytes([0xa3]):
         #     print("Sucesso")
     
-        end = time.time()
+        # end = time.time()
             
 
-        delta = end - start
-        ThroughPut = len(payload)/delta
-        OverHead = len(package)/len(payload)
+        # delta = end - start
+        # ThroughPut = len(payload)/delta
+        # OverHead = len(package)/len(payload)
 
-        print("Tempo:      {} s".format(delta))
-        print("ThroughPut: {} b/s".format(ThroughPut))
-        print("OverHead:   {} %".format(OverHead))
-        print(" ")
+        # print("Tempo:      {} s".format(delta))
+        # print("ThroughPut: {} b/s".format(ThroughPut))
+        # print("OverHead:   {} %".format(OverHead))
+        # print(" ")
          
     # Encerra comunicação
     print("-------------------------")
