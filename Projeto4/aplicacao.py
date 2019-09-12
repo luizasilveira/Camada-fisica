@@ -20,7 +20,7 @@ import time
 
 #serialName = "/dev/ttyACM0"           # Ubuntu (variacao de)
 #serialName = "/dev/tty.usbmodem1411" # Mac    (variacao de)
-serialName = "COM9"                  # Windows(variacao de)
+serialName = "COM3"                  # Windows(variacao de)
 print("abriu com")
 
 def eop():
@@ -48,15 +48,18 @@ def eopReplaced():
     return emptyPayloadReplaced, payloadReplaced
 
 def allpayloads():
-     eachPayloadmsg = [eopReplaced()[0][x:x+128] for x in range(0, len(eopReplaced()), 128)]
-     eachPayloadimg = [eopReplaced()[1][x:x+128] for x in range(0, len(eopReplaced()), 128)]
+     eachPayloadmsg = [eopReplaced()[0][x:x+128] for x in range(0, len(eopReplaced()[0]), 128)]
+     eachPayloadimg = [eopReplaced()[1][x:x+128] for x in range(0, len(eopReplaced()[1]), 128)]
 
      return eachPayloadmsg, eachPayloadimg
-
+     
+def totalPackage() : 
+    total = len(allpayloads()[1])
+    return total
 
 def message1():
     serverNumber = bytes([0x93])
-    totalPackage = len(allpayloads()[0]).to_bytes(3,"little")
+    totalPackage =  len(allpayloads()[1]).to_bytes(3,"little")
     # numberPackage = 0
     # emptyHead =  bytes([0x00]) * 3
     messageNumber = bytes([0x01])
@@ -65,10 +68,31 @@ def message1():
     
 
     emptyhead = bytes([0x00])*4
-    head = messageNumber + serverNumber + totalPackage + payloadSize + emptyhead
+    head = messageNumber + serverNumber +  totalPackage() + payloadSize + emptyhead
     package = head + payloadS + eop()
 
     return package
+
+def message3():
+    serverNumber = bytes([0x93])
+    totalPackage = len(allpayloads()[1]).to_bytes(3,"little")
+    numberPackage = 0
+    # numberPackage = 0
+    # emptyHead =  bytes([0x00]) * 3
+    messageNumber = bytes([0x03])
+    for payloadS in allpayloads()[1]:
+        payloadSize = len(payloadS).to_bytes(1,"little")
+        numberPackage += 1
+        numberPackageB = numberPackage.to_bytes(3,"little")
+    
+
+    emptyhead = bytes([0x00])*2
+    head = messageNumber + numberPackageB + totalPackage + payloadSize + emptyhead
+    package = head + payloadS + eop()
+
+    return package
+
+
 
 def client():
 
@@ -107,11 +131,25 @@ def client():
 
         head, headsize = com.getData(10)
         messageNumber = int.from_bytes(head[:1], "little")
-        print ("Numero da mensagem {}".format(messageNumber))
+        print ("Numero da mensagem : {}".format(messageNumber))
 
         if messageNumber == 2:
-            inicia = True
+            cont = 1
             print("esta certo")
+            while cont <= totalPackage():
+                com.sendData(message3())
+                time1 = time.time()
+                com.getData(10)
+                head, headsize = com.getData(10)
+                messageNumber = int.from_bytes(head[:1], "little")
+                if messageNumber == 4:
+                    cont += 1
+                if messageNumber == 6:
+                    print("n sei")
+
+            timer2 = time.time()
+
+            
 
         else:
             inicia = False

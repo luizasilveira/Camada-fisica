@@ -13,7 +13,7 @@ from enlace import *
 import time
 
 def eop():
-
+    
     eop = bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3])
     return eop 
 
@@ -46,7 +46,6 @@ def message2():
 
     return package
 
-print(message2)
 
 
 # Serial Com Port
@@ -54,8 +53,8 @@ print(message2)
 #   python3 -m serial.tools.list_ports
 
 #serialName = "/dev/ttyACM0"           # Ubuntu (variacao de)
-serialName = "/dev/cu.usbmodem143101" # Mac    (variacao de)
-# serialName = "COM5"                  # Windows(variacao de)
+#serialName = "/dev/cu.usbmodem143101" # Mac    (variacao de)
+serialName = "COM10"                  # Windows(variacao de)
 print("abriu com")
 
 def server():
