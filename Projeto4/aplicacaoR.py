@@ -97,6 +97,10 @@ def server():
             ocioso = True
             print("ok")
             time.sleep(1)
+            cont = 1
+            if cont <= totalPackage :
+                timer1 = time.time()
+                
 
         else:
             ocioso = False
