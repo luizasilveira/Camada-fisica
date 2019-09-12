@@ -46,15 +46,35 @@ def message2():
 
     return package
 
+def message4(numberPackage):
+    msgType = bytes([4])
+    numberPackageBytes = numberPackage.to_bytes(3, "little")
+    payloadSize = bytes([0])
+    emptyhead = bytes([0x00])*5
 
+    head = msgType +  numberPackageBytes + payloadSize + emptyhead
+    package = head + eop()
+
+    return package
+
+def message6(numberPackage):
+    msgType = bytes([6])
+    numberPackageBytes = numberPackage.to_bytes(3, "little")
+    payloadSize = bytes([0])
+    emptyhead = bytes([0x00])*5
+
+    head = msgType +  numberPackageBytes + payloadSize + emptyhead
+    package = head + eop()
+
+    return package
 
 # Serial Com Port
 #   para saber a sua porta, execute no terminal :
 #   python3 -m serial.tools.list_ports
 
 #serialName = "/dev/ttyACM0"           # Ubuntu (variacao de)
-#serialName = "/dev/cu.usbmodem143101" # Mac    (variacao de)
-serialName = "COM10"                  # Windows(variacao de)
+serialName = "/dev/cu.usbmodem146201" # Mac    (variacao de)
+#serialName = "COM10"                  # Windows(variacao de)
 print("abriu com")
 
 def server():
@@ -77,11 +97,12 @@ def server():
     while not ocioso:
 
         head, headSize = com.getData(10)
+        print("Received TYPE1")
 
         serverNumber = 147
 
         messageNumber = int.from_bytes(head[:1], "little")
-        print ("Numero do pacote {}".format(messageNumber))
+        print ("Numero da mensagem {}".format(messageNumber))
 
         serverNumberR = int.from_bytes(head[1:2], "little")
         print ("Numero do Servidor {}".format(serverNumberR))
@@ -94,52 +115,71 @@ def server():
         
         if serverNumberR == serverNumber:
             com.sendData(message2())
-            ocioso = True
-            print("ok")
-            time.sleep(1)
+
+            print("Sent TYPE2")
+
+            tudo = bytes()
+
             cont = 1
-            if cont <= totalPackage :
-                timer1 = time.time()
-                
+            com.rx.clearBuffer()
+            while cont <= totalPackage:
+                print("Entrou")
+                head, headSize = com.getData(10)
+                print(head)
 
-        else:
-            ocioso = False
+                msgType = int.from_bytes(head[:1], "little")
+                numberPackage = int.from_bytes(head[1:4], "little")
+                totalPackage2 = int.from_bytes(head[4:7], "little")
+                payloadSize = int.from_bytes(head[7:8], "little")
 
+                if msgType == 3:
+                    if numberPackage == cont:
+                        print("Número do pacote esperado")
+                        payloadEop, payloadEopSize = com.getData(payloadSize + len(eop()))
 
+                        if payloadSize != payloadEopSize - len(eop()):
+                            print("ERRO: Tamanho do payload errado.")
+                            com.sendData(message6(numberPackage))
 
+                        if eop() in payloadEop:
+                            i = payloadEop.find(eop())
+                            print("EOP na posicão {}".format(i))
+                            payload = payloadEop[:i]
 
-        payloadEop, payloadEopSize = com.getData(int(payloadSize) + len(eop))
-        if eop in payloadEop:
-            i = payloadEop.find(eop)
-            payload = payloadEop[:i]
-            bufferReceived += payload
-            print("EOP na posicão {}".format(i))
+                            leftover = payloadEop[i:]
+                            if leftover == eop():
+                                print("EOP está no lugar certo")
+                                com.sendData(message4(numberPackage))
+                                tudo += payload
+                                cont += 1
+                                print(cont)
+                                continue
+                            else:
+                                print("ERRO: EOP está no lugar errado")
+                                com.sendData(message6(numberPackage))
+                        else:
+                            print("ERRO: EOP não encontrado")
+                            com.sendData(message6(numberPackage))
+                    else:
+                        print("ERRO: Número do pacote diferente do esperado")
+                        com.sendData(message6(numberPackage))
 
-            if eop != payloadEop[i:]:
-                print("ERRO: EOP está no lugar errado")
-                com.sendData(bytes([0xa2]))
-                print ("Transmitido {} bytes ".format(1))
-                continue
+                com.rx.clearBuffer()
+
         
-        else: 
-            print("ERRO: EOP não encontrado")
-            com.sendData(bytes([0xa1]))
-            print ("Transmitido {} bytes ".format(1))
-            continue
-        
-        payload = payload.replace(eopReplaced, eop)
+        # payload = payload.replace(eopReplaced, eop)
 
-        payloadSize = len(payload)
+        # payloadSize = len(payload)
 
-        sizeReceived = payloadEopSize - len(eop)
+        # sizeReceived = payloadEopSize - len(eop)
 
-        if sizeReceived == payloadSize:
-            print("Sucesso")
-            com.sendData(bytes([0xa3]))
-            print ("Transmitido {} bytes ".format(1))
+        # if sizeReceived == payloadSize:
+        #     print("Sucesso")
+        #     com.sendData(bytes([0xa3]))
+        #     print ("Transmitido {} bytes ".format(1))
     
-        print ("Recebidos {} bytes ".format(headSize + payloadEopSize))
-        print(" ")
+        # print ("Recebidos {} bytes ".format(headSize + payloadEopSize))
+        # print(" ")
 
         # if packageNumber == totalPackage:
         #     with open("testeee.jpg", "wb") as img:
