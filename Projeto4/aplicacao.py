@@ -11,6 +11,7 @@ print("comecou")
 
 from enlace import *
 import time
+import math
 
 
 
@@ -28,7 +29,7 @@ def eop():
     eop = bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3])
     return eop 
 
-def payload():
+def getFile():
     
     with open("image.png", "rb") as image:
         payload = image.read()
@@ -43,7 +44,7 @@ def eopReplaced():
     eopReplaced = bytes([0x00]) + bytes([0xf1]) +  bytes([0x00]) + bytes([0xf2]) +  bytes([0x00]) + bytes([0xf3])
 
     emptyPayloadReplaced =  emptyPayload.replace(eop(), eopReplaced)
-    payloadReplaced = payload().replace(eop(), eopReplaced)
+    payloadReplaced = getFile().replace(eop(), eopReplaced)
 
     return emptyPayloadReplaced, payloadReplaced
 
@@ -68,34 +69,16 @@ def message1():
     
 
     emptyhead = bytes([0x00])*4
-    head = messageNumber + serverNumber +  totalPackage() + payloadSize + emptyhead
+    head = messageNumber + serverNumber +  totalPackage + payloadSize + emptyhead
     package = head + payloadS + eop()
 
     return package
 
-def message3():
-    serverNumber = bytes([0x93])
-    totalPackage = len(allpayloads()[1]).to_bytes(3,"little")
-    numberPackage = 0
-    # numberPackage = 0
-    # emptyHead =  bytes([0x00]) * 3
-    messageNumber = bytes([0x03])
-    for payloadS in allpayloads()[1]:
-        payloadSize = len(payloadS).to_bytes(1,"little")
-        numberPackage += 1
-        numberPackageB = numberPackage.to_bytes(3,"little")
-    
 
-    emptyhead = bytes([0x00])*2
-    head = messageNumber + numberPackageB + totalPackage + payloadSize + emptyhead
-    package = head + payloadS + eop()
-
-    return package
 
 
 
 def client():
-
     # Inicializa enlace ... variavel com possui todos os metodos e propriedades do enlace, que funciona em threading
     com = enlace(serialName) # repare que o metodo construtor recebe um string (nome)
     # Ativa comunicacao
@@ -114,40 +97,71 @@ def client():
     print("tentado transmitir .... {} bytes".format(len(message1())))
 
     inicia = False
-    while not inicia :
-
-        start = time.time()
+    while not inicia:
         com.sendData(message1())
+        print("Sent TYPE1")
 
-        #espera o fim da transmissão
         while(com.tx.getIsBussy()):
             pass
 
-        # Atualiza dados da transmissão
-        txSize = com.tx.getStatus()
+        head, headsize = com.getData(10,1)
 
-        print ("Transmitido {} bytes ".format(txSize))
-        time.sleep(5)
-
-        head, headsize = com.getData(10)
         messageNumber = int.from_bytes(head[:1], "little")
-        print ("Numero da mensagem : {}".format(messageNumber))
 
         if messageNumber == 2:
-            cont = 1
-            print("esta certo")
-            while cont <= totalPackage():
-                com.sendData(message3())
-                time1 = time.time()
-                com.getData(10)
-                head, headsize = com.getData(10)
-                messageNumber = int.from_bytes(head[:1], "little")
-                if messageNumber == 4:
-                    cont += 1
-                if messageNumber == 6:
-                    print("n sei")
+            print("Received TYPE2")
 
-            timer2 = time.time()
+            arquivo = getFile()
+            arquivoSize = len(arquivo)
+
+            totalPacotes = math.ceil(arquivoSize / 128)
+            pacoteAtual = 1
+            com.rx.clearBuffer()
+            while pacoteAtual <= totalPacotes:
+                print(pacoteAtual)
+                payload = arquivo[(pacoteAtual - 1)*128 : pacoteAtual*128]
+
+                head = bytes([3]) + pacoteAtual.to_bytes(3, "little") + totalPacotes.to_bytes(3, "little") + len(payload).to_bytes(1, "little") + bytes([0]) * 2
+
+                startTime = time.time()
+                recebido = False
+                while not recebido:
+                    com.sendData(head + payload + eop())
+                    print("Sent TYPE3")
+
+                    response, responseSize = com.getData(10, 5)
+                    print(response, responseSize)
+                    print("Received TYPE4")
+
+                    if responseSize != 0:
+                        message_number = int.from_bytes(response[:1], "little")
+                        if message_number == 4:
+                            pacoteAtual +=1
+                        
+                            print(pacoteAtual)
+                    
+                        #verifica msg
+                        recebido = True
+
+                    if  time.time() - startTime > 20:
+                        #sendType5()
+                        com.disable()
+                        exit()
+                    
+                    com.rx.clearBuffer()         
+
+                                   
+                
+
+            #     com.getData(10)
+            #     head, headsize = com.getData(10)
+            #     messageNumber = int.from_bytes(head[:1], "little")
+            #     if messageNumber == 5:
+            #         cont += 1
+            #     if messageNumber == 6:
+            #         print("n sei")
+
+            # timer2 = time.time()
 
             
 
