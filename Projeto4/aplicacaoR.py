@@ -1,4 +1,4 @@
- #!/usr/bin/env python3
+#!/usr/bin/env python3
 # -- coding: utf-8 --
 #####################################################
 # Camada Física da Computação
@@ -68,12 +68,22 @@ def message6(numberPackage):
 
     return package
 
+def message5():
+    msgType = bytes([5])
+    payloadSize = bytes([0])
+    emptyhead = bytes([0x00])*8
+
+    head = msgType +  payloadSize + emptyhead
+    package = head + eop()
+
+    return package
+
 # Serial Com Port
 #   para saber a sua porta, execute no terminal :
 #   python3 -m serial.tools.list_ports
 
 #serialName = "/dev/ttyACM0"           # Ubuntu (variacao de)
-serialName = "/dev/cu.usbmodem146201" # Mac    (variacao de)
+serialName = "/dev/cu.usbmodem144201" # Mac    (variacao de)
 #serialName = "COM10"                  # Windows(variacao de)
 print("abriu com")
 
@@ -95,78 +105,101 @@ def server():
     ocioso = False
     bufferReceived = bytearray()
     while not ocioso:
+        head, headSize = com.getData(10,1)
+        print(head)
 
-        head, headSize = com.getData(10)
-        print("Received TYPE1")
+        if headSize != 0:
+            print("Received TYPE1")
 
-        serverNumber = 147
+            serverNumber = 147
 
-        messageNumber = int.from_bytes(head[:1], "little")
-        print ("Numero da mensagem {}".format(messageNumber))
+            messageNumber = int.from_bytes(head[:1], "little")
+            print ("Numero da mensagem {}".format(messageNumber))
 
-        serverNumberR = int.from_bytes(head[1:2], "little")
-        print ("Numero do Servidor {}".format(serverNumberR))
+            serverNumberR = int.from_bytes(head[1:2], "little")
+            print ("Numero do Servidor {}".format(serverNumberR))
 
-        totalPackage = int.from_bytes(head[2:5], "little")
-        print ("Numero total de pacotes {}".format(totalPackage))
+            totalPackage = int.from_bytes(head[2:5], "little")
+            print ("Numero total de pacotes {}".format(totalPackage))
 
-        payloadSize = int.from_bytes(head[5:6], "little")
-        print ("Tamnaho do payload {}".format(payloadSize))
-        
-        if serverNumberR == serverNumber:
-            com.sendData(message2())
+            payloadSize = int.from_bytes(head[5:6], "little")
+            print ("Tamnaho do payload {}".format(payloadSize))
+            
+            if serverNumberR == serverNumber:
+                com.sendData(message2())
 
-            print("Sent TYPE2")
+                print("Sent TYPE2")
 
-            tudo = bytes()
+                tudo = bytes()
 
-            cont = 1
-            com.rx.clearBuffer()
-            while cont <= totalPackage:
-                print("Entrou")
-                head, headSize = com.getData(10)
-                print(head)
-
-                msgType = int.from_bytes(head[:1], "little")
-                numberPackage = int.from_bytes(head[1:4], "little")
-                totalPackage2 = int.from_bytes(head[4:7], "little")
-                payloadSize = int.from_bytes(head[7:8], "little")
-
-                if msgType == 3:
-                    if numberPackage == cont:
-                        print("Número do pacote esperado")
-                        payloadEop, payloadEopSize = com.getData(payloadSize + len(eop()))
-
-                        if payloadSize != payloadEopSize - len(eop()):
-                            print("ERRO: Tamanho do payload errado.")
-                            com.sendData(message6(numberPackage))
-
-                        if eop() in payloadEop:
-                            i = payloadEop.find(eop())
-                            print("EOP na posicão {}".format(i))
-                            payload = payloadEop[:i]
-
-                            leftover = payloadEop[i:]
-                            if leftover == eop():
-                                print("EOP está no lugar certo")
-                                com.sendData(message4(numberPackage))
-                                tudo += payload
-                                cont += 1
-                                print(cont)
-                                continue
-                            else:
-                                print("ERRO: EOP está no lugar errado")
-                                com.sendData(message6(numberPackage))
-                        else:
-                            print("ERRO: EOP não encontrado")
-                            com.sendData(message6(numberPackage))
-                    else:
-                        print("ERRO: Número do pacote diferente do esperado")
-                        com.sendData(message6(numberPackage))
-
+                cont = 1
                 com.rx.clearBuffer()
+                while cont <= totalPackage:
+                    print("Entrou")
+                    recebido = False
+                    startTime = time.time()
+                    while not recebido:
+                        head, headSize = com.getData(10,2)
+                        if headSize != 0:
+                            print("Received TYPE3")
+                            time.sleep(1)
 
-        
+                            msgType = int.from_bytes(head[:1], "little")
+                            numberPackage = int.from_bytes(head[1:4], "little")
+                            payloadSize = int.from_bytes(head[7:8], "little")
+
+                            if msgType == 3:
+                                if numberPackage == cont:
+                                    print("Número do pacote esperado")
+                                    payloadEop, payloadEopSize = com.getData(payloadSize + len(eop()),1)
+
+                                    if payloadSize != payloadEopSize - len(eop()):
+                                        print("ERRO: Tamanho do payload errado.")
+                                        com.sendData(message6(numberPackage))
+                                        print("Sent TYPE6")
+
+                                    if eop() in payloadEop:
+                                        i = payloadEop.find(eop())
+                                        print("EOP na posicão {}".format(i))
+                                        payload = payloadEop[:i]
+
+                                        leftover = payloadEop[i:]
+                                        if leftover == eop():
+                                            print("EOP está no lugar certo")
+                                            com.sendData(message4(numberPackage))
+                                            print("Sent TYPE4")
+                                            tudo += payload
+                                            cont += 1
+                                            print(cont)
+                                            continue
+                                        else:
+                                            print("ERRO: EOP está no lugar errado")
+                                            com.sendData(message6(numberPackage))
+                                            print("Sent TYPE6")
+                                    else:
+                                        print("ERRO: EOP não encontrado")
+                                        com.sendData(message6(numberPackage))
+                                        print("Sent TYPE6")
+                                else:
+                                    print("ERRO: Número do pacote diferente do esperado")
+                                    com.sendData(message6(numberPackage))
+                                    print("Sent TYPE6")
+
+                        if time.time() - startTime > 20:
+                            com.sendData(message5())
+                            print("Sent TYPE5")
+                            com.disable()
+                            exit()
+
+                        if time.time() - startTime > 2:
+                            com.sendData(message4(cont))
+                            print("Sent TYPE444444")
+
+                    com.rx.clearBuffer()
+
+        com.rx.clearBuffer()    
+        ocioso = False 
+
         # payload = payload.replace(eopReplaced, eop)
 
         # payloadSize = len(payload)

@@ -26,7 +26,7 @@ print("abriu com")
 
 def eop():
 
-    eop = bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3])
+    eop = bytes([0xf1]) + bytes([0xf2]) + bytes([0xf2])
     return eop 
 
 def getFile():
@@ -74,6 +74,16 @@ def message1():
 
     return package
 
+def message5():
+    messagetype = bytes([5])
+    payloadSize = bytes([0])
+    emptyHead = bytes([0])* 8
+
+    head = messagetype + payloadSize + emptyHead
+    package = head + eop()
+
+    return package
+
 
 
 
@@ -100,6 +110,8 @@ def client():
     while not inicia:
         com.sendData(message1())
         print("Sent TYPE1")
+        time.sleep(2)
+      
 
         while(com.tx.getIsBussy()):
             pass
@@ -122,29 +134,33 @@ def client():
                 payload = arquivo[(pacoteAtual - 1)*128 : pacoteAtual*128]
 
                 head = bytes([3]) + pacoteAtual.to_bytes(3, "little") + totalPacotes.to_bytes(3, "little") + len(payload).to_bytes(1, "little") + bytes([0]) * 2
-
+                message3 =  head + payload + eop()
                 startTime = time.time()
                 recebido = False
                 while not recebido:
-                    com.sendData(head + payload + eop())
+                    com.sendData(message3)
+                    print(message3)
                     print("Sent TYPE3")
 
-                    response, responseSize = com.getData(10, 5)
-                    print(response, responseSize)
-                    print("Received TYPE4")
+                    responseHead, responseSize = com.getData(10, 5)
+                    print(responseHead, responseSize)
+                    
 
                     if responseSize != 0:
-                        message_number = int.from_bytes(response[:1], "little")
+                        print("Received TYPE4")
+                        message_number = int.from_bytes(responseHead[:1], "little")
                         if message_number == 4:
                             pacoteAtual +=1
-                        
-                            print(pacoteAtual)
-                    
+
+                        if message_number == 6:
+                            lastPackage = int.from_bytes(responseHead[1:4], "little")
+                            pacoteAtual = lastPackage
+
                         #verifica msg
                         recebido = True
 
                     if  time.time() - startTime > 20:
-                        #sendType5()
+                        com.sendData(message5(), 1)
                         com.disable()
                         exit()
                     
