@@ -21,12 +21,12 @@ import math
 
 #serialName = "/dev/ttyACM0"           # Ubuntu (variacao de)
 #serialName = "/dev/tty.usbmodem1411" # Mac    (variacao de)
-serialName = "COM3"                  # Windows(variacao de)
+serialName = "COM9"                  # Windows(variacao de)
 print("abriu com")
 
 def eop():
 
-    eop = bytes([0xf1]) + bytes([0xf2]) + bytes([0xf2])
+    eop = bytes([0xf1]) + bytes([0xf2]) + bytes([0xf3])
     return eop 
 
 def getFile():
@@ -127,10 +127,12 @@ def client():
             arquivoSize = len(arquivo)
 
             totalPacotes = math.ceil(arquivoSize / 128)
+            print(totalPacotes)
+            print("kkk")
             pacoteAtual = 1
             com.rx.clearBuffer()
             while pacoteAtual <= totalPacotes:
-                print(pacoteAtual)
+                print ("pacote atual {}".format(pacoteAtual))
                 payload = arquivo[(pacoteAtual - 1)*128 : pacoteAtual*128]
 
                 head = bytes([3]) + pacoteAtual.to_bytes(3, "little") + totalPacotes.to_bytes(3, "little") + len(payload).to_bytes(1, "little") + bytes([0]) * 2
@@ -140,45 +142,42 @@ def client():
                 while not recebido:
                     com.sendData(message3)
                     print(message3)
+                    print(" ")
                     print("Sent TYPE3")
 
                     responseHead, responseSize = com.getData(10, 5)
                     print(responseHead, responseSize)
                     
-
                     if responseSize != 0:
-                        print("Received TYPE4")
+                        
                         message_number = int.from_bytes(responseHead[:1], "little")
                         if message_number == 4:
+                            print("Received TYPE4")
                             pacoteAtual +=1
 
-                        if message_number == 6:
-                            lastPackage = int.from_bytes(responseHead[1:4], "little")
-                            pacoteAtual = lastPackage
+                        if message_number == 7:
+                            pacoteAtual = pacoteAtual    
+                            
 
-                        #verifica msg
+                        if message_number == 6:
+                            print("Received TYPE6")
+                            lastPackage = int.from_bytes(responseHead[1:4], "little")
+                            print ("ultimo pacote recebido {}".format(lastPackage))
+                            print("")
+                            pacoteAtual = lastPackage + 1 
+                            print ("pacote corrigido {}".format(pacoteAtual))
+
+                        
                         recebido = True
 
                     if  time.time() - startTime > 20:
-                        com.sendData(message5(), 1)
+                        com.sendData(message5())
                         com.disable()
                         exit()
                     
                     com.rx.clearBuffer()         
 
-                                   
-                
-
-            #     com.getData(10)
-            #     head, headsize = com.getData(10)
-            #     messageNumber = int.from_bytes(head[:1], "little")
-            #     if messageNumber == 5:
-            #         cont += 1
-            #     if messageNumber == 6:
-            #         print("n sei")
-
-            # timer2 = time.time()
-
+                                
             
 
         else:

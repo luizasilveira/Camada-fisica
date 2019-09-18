@@ -57,6 +57,16 @@ def message4(numberPackage):
 
     return package
 
+def message4s(numberPackage):
+    msgType = bytes([7])
+    numberPackageBytes = numberPackage.to_bytes(3, "little")
+    payloadSize = bytes([0])
+    emptyhead = bytes([0x00])*5
+
+    head = msgType +  numberPackageBytes + payloadSize + emptyhead
+    package = head + eop()
+
+    return package
 def message6(numberPackage):
     msgType = bytes([6])
     numberPackageBytes = numberPackage.to_bytes(3, "little")
@@ -83,8 +93,8 @@ def message5():
 #   python3 -m serial.tools.list_ports
 
 #serialName = "/dev/ttyACM0"           # Ubuntu (variacao de)
-serialName = "/dev/cu.usbmodem144201" # Mac    (variacao de)
-#serialName = "COM10"                  # Windows(variacao de)
+#serialName = "/dev/cu.usbmodem144201" # Mac    (variacao de)
+serialName = "COM10"                  # Windows(variacao de)
 print("abriu com")
 
 def server():
@@ -133,6 +143,7 @@ def server():
                 tudo = bytes()
 
                 cont = 1
+                print ("cont {}".format(cont))
                 com.rx.clearBuffer()
                 while cont <= totalPackage:
                     print("Entrou")
@@ -140,18 +151,24 @@ def server():
                     startTime = time.time()
                     while not recebido:
                         head, headSize = com.getData(10,2)
+                        print("get data1")
                         if headSize != 0:
-                            print("Received TYPE3")
-                            time.sleep(1)
+                            
 
                             msgType = int.from_bytes(head[:1], "little")
                             numberPackage = int.from_bytes(head[1:4], "little")
+                            
                             payloadSize = int.from_bytes(head[7:8], "little")
+                        
 
                             if msgType == 3:
+                                print("Received TYPE3")
+                                print ("numero do pacote recebido {}".format(numberPackage))
                                 if numberPackage == cont:
                                     print("Número do pacote esperado")
                                     payloadEop, payloadEopSize = com.getData(payloadSize + len(eop()),1)
+                                    print("getdata 2")
+                                   
 
                                     if payloadSize != payloadEopSize - len(eop()):
                                         print("ERRO: Tamanho do payload errado.")
@@ -166,12 +183,18 @@ def server():
                                         leftover = payloadEop[i:]
                                         if leftover == eop():
                                             print("EOP está no lugar certo")
-                                            com.sendData(message4(numberPackage))
                                             print("Sent TYPE4")
+                                            print(" ")
                                             tudo += payload
+                                            com.sendData(message4(numberPackage))
                                             cont += 1
-                                            print(cont)
+                                            recebido = True
+                                            
+                                            
+                                            print ("Proximo pacote esperado : {}".format(cont))
+                                            print(" ")
                                             continue
+                                           
                                         else:
                                             print("ERRO: EOP está no lugar errado")
                                             com.sendData(message6(numberPackage))
@@ -188,19 +211,34 @@ def server():
                         if time.time() - startTime > 20:
                             com.sendData(message5())
                             print("Sent TYPE5")
+                            print("Time out")
                             com.disable()
                             exit()
 
-                        if time.time() - startTime > 2:
+                        if time.time() - startTime > 10:
                             com.sendData(message4(cont))
-                            print("Sent TYPE444444")
+                            print("Sent TYPE44")
+                            print(" ")
+                       
+                        
 
-                    com.rx.clearBuffer()
+                        
+
+                        com.rx.clearBuffer()
+
+                           
+
+                
+                print("saiu")
+                with open("testeee.jpg", "wb") as img:
+                    img.write(tudo)
+        
+
 
         com.rx.clearBuffer()    
         ocioso = False 
 
-        # payload = payload.replace(eopReplaced, eop)
+#        # payload = payload.replace(eopReplaced, eop)
 
         # payloadSize = len(payload)
 
