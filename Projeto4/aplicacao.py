@@ -12,6 +12,7 @@ print("comecou")
 from enlace import *
 import time
 import math
+from datetime import datetime
 
 
 
@@ -70,7 +71,7 @@ def message1():
 
     emptyhead = bytes([0x00])*4
     head = messageNumber + serverNumber +  totalPackage + payloadSize + emptyhead
-    package = head + payloadS + eop()
+    package = head + eop()
 
     return package
 
@@ -84,9 +85,15 @@ def message5():
 
     return package
 
-
-
-
+def log(mensagem):
+    now = datetime.now()
+    # dd/mm/YY H:M:S
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    print(mensagem + " | " + dt_string)
+    with open("client.log", "a") as file:
+        file.write(mensagem + " | " + dt_string + "\n" + "\n")
+        
+    
 
 def client():
     # Inicializa enlace ... variavel com possui todos os metodos e propriedades do enlace, que funciona em threading
@@ -95,22 +102,21 @@ def client():
     com.enable()
 
     # Log
-    print("-------------------------")
-    print("Comunicação inicializada")
-    print("  porta : {}".format(com.fisica.name))
-    print("-------------------------")
+    log("-------------------------")
+    log("Comunicação inicializada")
+    log("  porta : {}".format(com.fisica.name))
+    log("-------------------------")
    
 
-    print ("gerando dados para transmissao :")
+    log("Gerando dados para transmissao :")
 
     # Transmite dado
-    print("tentado transmitir .... {} bytes".format(len(message1())))
+    log("tentado transmitir .... {} bytes".format(len(message1())))
 
     inicia = False
     while not inicia:
         com.sendData(message1())
-        print("Sent TYPE1")
-        time.sleep(2)
+        log("TIPO 1 Transmitido")
       
 
         while(com.tx.getIsBussy()):
@@ -121,18 +127,16 @@ def client():
         messageNumber = int.from_bytes(head[:1], "little")
 
         if messageNumber == 2:
-            print("Received TYPE2")
+            log("TIPO 2 recebido")
 
             arquivo = getFile()
             arquivoSize = len(arquivo)
 
             totalPacotes = math.ceil(arquivoSize / 128)
-            print(totalPacotes)
-            print("kkk")
             pacoteAtual = 1
             com.rx.clearBuffer()
             while pacoteAtual <= totalPacotes:
-                print ("pacote atual {}".format(pacoteAtual))
+                log("Pacote atual: {}".format(pacoteAtual))
                 payload = arquivo[(pacoteAtual - 1)*128 : pacoteAtual*128]
 
                 head = bytes([3]) + pacoteAtual.to_bytes(3, "little") + totalPacotes.to_bytes(3, "little") + len(payload).to_bytes(1, "little") + bytes([0]) * 2
@@ -141,31 +145,26 @@ def client():
                 recebido = False
                 while not recebido:
                     com.sendData(message3)
-                    print(message3)
-                    print(" ")
-                    print("Sent TYPE3")
+                    log("TIPO 3 Transmitido")
 
                     responseHead, responseSize = com.getData(10, 5)
-                    print(responseHead, responseSize)
+                    lastPackage = int.from_bytes(responseHead[1:4], "little")
                     
                     if responseSize != 0:
                         
+                        
                         message_number = int.from_bytes(responseHead[:1], "little")
                         if message_number == 4:
-                            print("Received TYPE4")
+                            log("TIPO 4 recebido")
+                            log("Ultimo pacote recebido: {}".format(lastPackage))
                             pacoteAtual +=1
-
-                        if message_number == 7:
-                            pacoteAtual = pacoteAtual    
-                            
-
+                               
                         if message_number == 6:
-                            print("Received TYPE6")
-                            lastPackage = int.from_bytes(responseHead[1:4], "little")
-                            print ("ultimo pacote recebido {}".format(lastPackage))
-                            print("")
-                            pacoteAtual = lastPackage + 1 
-                            print ("pacote corrigido {}".format(pacoteAtual))
+                            log("TIPO 6 recebido")
+                            log ("Ultimo pacote recebido: {}".format(lastPackage))
+                            
+                            pacoteAtual = lastPackage  
+                            log("Reenvinado pacote: {}".format(pacoteAtual))
 
                         
                         recebido = True
@@ -175,17 +174,24 @@ def client():
                         com.disable()
                         exit()
                     
-                    com.rx.clearBuffer()         
+                    com.rx.clearBuffer()  
 
+
+            log("-------------------------")
+            log("Comunicação encerrada")
+            log("-------------------------")
+            com.disable()
+            exit()
+                    
                                 
             
 
         else:
             inicia = False
 
-    print("-------------------------")
-    print("Comunicação encerrada")
-    print("-------------------------")
+    log("-------------------------")
+    log("Comunicação encerrada")
+    log("-------------------------")
 
     com.disable()
 

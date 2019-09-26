@@ -1,0 +1,170 @@
+------------------------- | 20/09/2019 16:09:59
+
+Comunicação inicializada | 20/09/2019 16:10:00
+
+  porta : COM9 | 20/09/2019 16:10:00
+
+------------------------- | 20/09/2019 16:10:00
+
+Gerando dados para transmissao : | 20/09/2019 16:10:00
+
+tentado transmitir .... 13 bytes | 20/09/2019 16:10:00
+
+TIPO 1 Transmitido | 20/09/2019 16:10:02
+
+TIPO 1 Transmitido | 20/09/2019 16:10:04
+
+TIPO 1 Transmitido | 20/09/2019 16:10:06
+
+TIPO 2 recebido | 20/09/2019 16:10:06
+
+Pacote atual: 1 | 20/09/2019 16:10:06
+
+TIPO 3 Transmitido | 20/09/2019 16:10:06
+
+TIPO 3 Transmitido | 20/09/2019 16:10:11
+
+TIPO 4 recebido | 20/09/2019 16:10:12
+
+Ultimo pacote recebido: 1 | 20/09/2019 16:10:12
+
+Pacote atual: 2 | 20/09/2019 16:10:13
+
+TIPO 3 Transmitido | 20/09/2019 16:10:13
+
+TIPO 4 recebido | 20/09/2019 16:10:14
+
+Ultimo pacote recebido: 2 | 20/09/2019 16:10:14
+
+Pacote atual: 3 | 20/09/2019 16:10:14
+
+TIPO 3 Transmitido | 20/09/2019 16:10:14
+
+TIPO 4 recebido | 20/09/2019 16:10:15
+
+Ultimo pacote recebido: 3 | 20/09/2019 16:10:16
+
+Pacote atual: 4 | 20/09/2019 16:10:16
+
+TIPO 3 Transmitido | 20/09/2019 16:10:16
+
+TIPO 4 recebido | 20/09/2019 16:10:17
+
+Ultimo pacote recebido: 4 | 20/09/2019 16:10:17
+
+Pacote atual: 5 | 20/09/2019 16:10:17
+
+TIPO 3 Transmitido | 20/09/2019 16:10:17
+
+TIPO 4 recebido | 20/09/2019 16:10:18
+
+Ultimo pacote recebido: 5 | 20/09/2019 16:10:18
+
+Pacote atual: 6 | 20/09/2019 16:10:18
+
+TIPO 3 Transmitido | 20/09/2019 16:10:18
+
+TIPO 4 recebido | 20/09/2019 16:10:19
+
+Ultimo pacote recebido: 6 | 20/09/2019 16:10:19
+
+Pacote atual: 7 | 20/09/2019 16:10:19
+
+TIPO 3 Transmitido | 20/09/2019 16:10:19
+
+TIPO 3 Transmitido | 20/09/2019 16:10:24
+
+TIPO 3 Transmitido | 20/09/2019 16:10:30
+
+TIPO 3 Transmitido | 20/09/2019 16:10:35
+
+TIPO 4 recebido | 20/09/2019 16:10:36
+
+Ultimo pacote recebido: 7 | 20/09/2019 16:10:36
+
+Pacote atual: 8 | 20/09/2019 16:10:36
+
+TIPO 3 Transmitido | 20/09/2019 16:10:36
+
+TIPO 4 recebido | 20/09/2019 16:10:37
+
+Ultimo pacote recebido: 8 | 20/09/2019 16:10:37
+
+Pacote atual: 9 | 20/09/2019 16:10:37
+
+TIPO 3 Transmitido | 20/09/2019 16:10:37
+
+TIPO 4 recebido | 20/09/2019 16:10:38
+
+Ultimo pacote recebido: 9 | 20/09/2019 16:10:38
+
+Pacote atual: 10 | 20/09/2019 16:10:38
+
+TIPO 3 Transmitido | 20/09/2019 16:10:38
+
+TIPO 4 recebido | 20/09/2019 16:10:39
+
+Ultimo pacote recebido: 10 | 20/09/2019 16:10:39
+
+Pacote atual: 11 | 20/09/2019 16:10:39
+
+TIPO 3 Transmitido | 20/09/2019 16:10:39
+
+TIPO 4 recebido | 20/09/2019 16:10:41
+
+Ultimo pacote recebido: 11 | 20/09/2019 16:10:41
+
+------------------------- | 20/09/2019 16:10:41
+
+Comunicação encerrada | 20/09/2019 16:10:41
+
+------------------------- | 20/09/2019 16:10:41
+
+------------------------- | 20/09/2019 16:12:45
+
+Comunicação inicializada | 20/09/2019 16:12:45
+
+  porta : COM9 | 20/09/2019 16:12:45
+
+------------------------- | 20/09/2019 16:12:45
+
+Gerando dados para transmissao : | 20/09/2019 16:12:46
+
+tentado transmitir .... 13 bytes | 20/09/2019 16:12:49
+
+TIPO 1 Transmitido | 20/09/2019 16:12:50
+
+TIPO 1 Transmitido | 20/09/2019 16:12:52
+
+TIPO 1 Transmitido | 20/09/2019 16:12:54
+
+TIPO 2 recebido | 20/09/2019 16:12:54
+
+Pacote atual: 1 | 20/09/2019 16:12:54
+
+TIPO 3 Transmitido | 20/09/2019 16:12:54
+
+TIPO 3 Transmitido | 20/09/2019 16:12:59
+
+TIPO 4 recebido | 20/09/2019 16:13:00
+
+Ultimo pacote recebido: 1 | 20/09/2019 16:13:00
+
+Pacote atual: 2 | 20/09/2019 16:13:01
+
+TIPO 3 Transmitido | 20/09/2019 16:13:01
+
+TIPO 4 recebido | 20/09/2019 16:13:02
+
+Ultimo pacote recebido: 2 | 20/09/2019 16:13:02
+
+Pacote atual: 3 | 20/09/2019 16:13:02
+
+TIPO 3 Transmitido | 20/09/2019 16:13:02
+
+TIPO 3 Transmitido | 20/09/2019 16:13:07
+
+TIPO 3 Transmitido | 20/09/2019 16:13:12
+
+TIPO 3 Transmitido | 20/09/2019 16:13:17
+

@@ -1,0 +1,264 @@
+------------------------- | 20/09/2019 16:09:57
+
+Comunicação inicializada | 20/09/2019 16:09:58
+
+  porta : COM10 | 20/09/2019 16:09:58
+
+------------------------- | 20/09/2019 16:09:58
+
+Recebendo dados ....  | 20/09/2019 16:09:58
+
+TIPO 1 recebido | 20/09/2019 16:10:04
+
+Numero da mensagem 1 | 20/09/2019 16:10:04
+
+Numero do Servidor 147 | 20/09/2019 16:10:04
+
+Numero total de pacotes 11 | 20/09/2019 16:10:04
+
+Tamnaho do payload 1 | 20/09/2019 16:10:05
+
+Numero do servidor correto | 20/09/2019 16:10:05
+
+TIPO 2 Transmitido | 20/09/2019 16:10:05
+
+TIPO 3 recebido | 20/09/2019 16:10:12
+
+Numero do pacote recebido: 1 | 20/09/2019 16:10:12
+
+Número do pacote esperado!! | 20/09/2019 16:10:12
+
+EOP na posicão 128 | 20/09/2019 16:10:12
+
+EOP está no lugar certo | 20/09/2019 16:10:12
+
+TIPO 4 Transmitido | 20/09/2019 16:10:12
+
+Proximo pacote esperado : 2 | 20/09/2019 16:10:12
+
+TIPO 3 recebido | 20/09/2019 16:10:13
+
+Numero do pacote recebido: 2 | 20/09/2019 16:10:13
+
+Número do pacote esperado!! | 20/09/2019 16:10:14
+
+EOP na posicão 128 | 20/09/2019 16:10:14
+
+EOP está no lugar certo | 20/09/2019 16:10:14
+
+TIPO 4 Transmitido | 20/09/2019 16:10:14
+
+Proximo pacote esperado : 3 | 20/09/2019 16:10:14
+
+TIPO 3 recebido | 20/09/2019 16:10:15
+
+Numero do pacote recebido: 3 | 20/09/2019 16:10:15
+
+Número do pacote esperado!! | 20/09/2019 16:10:15
+
+EOP na posicão 128 | 20/09/2019 16:10:15
+
+EOP está no lugar certo | 20/09/2019 16:10:15
+
+TIPO 4 Transmitido | 20/09/2019 16:10:15
+
+Proximo pacote esperado : 4 | 20/09/2019 16:10:15
+
+TIPO 3 recebido | 20/09/2019 16:10:16
+
+Numero do pacote recebido: 4 | 20/09/2019 16:10:16
+
+Número do pacote esperado!! | 20/09/2019 16:10:16
+
+EOP na posicão 128 | 20/09/2019 16:10:16
+
+EOP está no lugar certo | 20/09/2019 16:10:16
+
+TIPO 4 Transmitido | 20/09/2019 16:10:16
+
+Proximo pacote esperado : 5 | 20/09/2019 16:10:17
+
+TIPO 3 recebido | 20/09/2019 16:10:17
+
+Numero do pacote recebido: 5 | 20/09/2019 16:10:17
+
+Número do pacote esperado!! | 20/09/2019 16:10:17
+
+EOP na posicão 128 | 20/09/2019 16:10:17
+
+EOP está no lugar certo | 20/09/2019 16:10:17
+
+TIPO 4 Transmitido | 20/09/2019 16:10:17
+
+Proximo pacote esperado : 6 | 20/09/2019 16:10:17
+
+TIPO 3 recebido | 20/09/2019 16:10:18
+
+Numero do pacote recebido: 6 | 20/09/2019 16:10:18
+
+Número do pacote esperado!! | 20/09/2019 16:10:18
+
+EOP na posicão 128 | 20/09/2019 16:10:19
+
+EOP está no lugar certo | 20/09/2019 16:10:19
+
+TIPO 4 Transmitido | 20/09/2019 16:10:19
+
+Proximo pacote esperado : 7 | 20/09/2019 16:10:19
+
+TIPO 3 recebido | 20/09/2019 16:10:35
+
+Numero do pacote recebido: 7 | 20/09/2019 16:10:35
+
+Número do pacote esperado!! | 20/09/2019 16:10:35
+
+EOP na posicão 128 | 20/09/2019 16:10:35
+
+EOP está no lugar certo | 20/09/2019 16:10:35
+
+TIPO 4 Transmitido | 20/09/2019 16:10:35
+
+Proximo pacote esperado : 8 | 20/09/2019 16:10:35
+
+TIPO 3 recebido | 20/09/2019 16:10:36
+
+Numero do pacote recebido: 8 | 20/09/2019 16:10:36
+
+Número do pacote esperado!! | 20/09/2019 16:10:36
+
+EOP na posicão 128 | 20/09/2019 16:10:36
+
+EOP está no lugar certo | 20/09/2019 16:10:37
+
+TIPO 4 Transmitido | 20/09/2019 16:10:37
+
+Proximo pacote esperado : 9 | 20/09/2019 16:10:37
+
+TIPO 3 recebido | 20/09/2019 16:10:37
+
+Numero do pacote recebido: 9 | 20/09/2019 16:10:37
+
+Número do pacote esperado!! | 20/09/2019 16:10:37
+
+EOP na posicão 128 | 20/09/2019 16:10:37
+
+EOP está no lugar certo | 20/09/2019 16:10:37
+
+TIPO 4 Transmitido | 20/09/2019 16:10:37
+
+Proximo pacote esperado : 10 | 20/09/2019 16:10:37
+
+TIPO 3 recebido | 20/09/2019 16:10:39
+
+Numero do pacote recebido: 10 | 20/09/2019 16:10:39
+
+Número do pacote esperado!! | 20/09/2019 16:10:39
+
+EOP na posicão 128 | 20/09/2019 16:10:39
+
+EOP está no lugar certo | 20/09/2019 16:10:39
+
+TIPO 4 Transmitido | 20/09/2019 16:10:39
+
+Proximo pacote esperado : 11 | 20/09/2019 16:10:39
+
+TIPO 3 recebido | 20/09/2019 16:10:40
+
+Numero do pacote recebido: 11 | 20/09/2019 16:10:40
+
+Número do pacote esperado!! | 20/09/2019 16:10:40
+
+EOP na posicão 105 | 20/09/2019 16:10:40
+
+EOP está no lugar certo | 20/09/2019 16:10:40
+
+TIPO 4 Transmitido | 20/09/2019 16:10:40
+
+Proximo pacote esperado : 12 | 20/09/2019 16:10:40
+
+------------------------- | 20/09/2019 16:12:41
+
+Comunicação inicializada | 20/09/2019 16:12:42
+
+  porta : COM10 | 20/09/2019 16:12:42
+
+------------------------- | 20/09/2019 16:12:42
+
+Recebendo dados ....  | 20/09/2019 16:12:42
+
+TIPO 1 recebido | 20/09/2019 16:12:53
+
+Numero da mensagem 1 | 20/09/2019 16:12:53
+
+Numero do Servidor 147 | 20/09/2019 16:12:53
+
+Numero total de pacotes 11 | 20/09/2019 16:12:53
+
+Tamnaho do payload 1 | 20/09/2019 16:12:53
+
+Numero do servidor correto | 20/09/2019 16:12:53
+
+TIPO 2 Transmitido | 20/09/2019 16:12:53
+
+TIPO 3 recebido | 20/09/2019 16:13:00
+
+Numero do pacote recebido: 1 | 20/09/2019 16:13:00
+
+Número do pacote esperado!! | 20/09/2019 16:13:00
+
+EOP na posicão 128 | 20/09/2019 16:13:00
+
+EOP está no lugar certo | 20/09/2019 16:13:00
+
+TIPO 4 Transmitido | 20/09/2019 16:13:00
+
+Proximo pacote esperado : 2 | 20/09/2019 16:13:00
+
+TIPO 3 recebido | 20/09/2019 16:13:01
+
+Numero do pacote recebido: 2 | 20/09/2019 16:13:01
+
+Número do pacote esperado!! | 20/09/2019 16:13:01
+
+EOP na posicão 128 | 20/09/2019 16:13:01
+
+EOP está no lugar certo | 20/09/2019 16:13:01
+
+TIPO 4 Transmitido | 20/09/2019 16:13:01
+
+Proximo pacote esperado : 3 | 20/09/2019 16:13:01
+
+TIPO 3 recebido | 20/09/2019 16:13:02
+
+Numero do pacote recebido: 3 | 20/09/2019 16:13:02
+
+Número do pacote esperado!! | 20/09/2019 16:13:02
+
+EOP na posicão 128 | 20/09/2019 16:13:02
+
+EOP está no lugar certo | 20/09/2019 16:13:02
+
+TIPO 4 Transmitido | 20/09/2019 16:13:02
+
+Proximo pacote esperado : 4 | 20/09/2019 16:13:02
+
+TIPO 3 recebido | 20/09/2019 16:13:12
+
+Numero do pacote recebido: 3 | 20/09/2019 16:13:12
+
+ERRO: Número do pacote diferente do esperado | 20/09/2019 16:13:12
+
+TIPO 6 Transmitido | 20/09/2019 16:13:13
+
+TIPO 3 recebido | 20/09/2019 16:13:17
+
+Numero do pacote recebido: 3 | 20/09/2019 16:13:17
+
+ERRO: Número do pacote diferente do esperado | 20/09/2019 16:13:17
+
+TIPO 6 Transmitido | 20/09/2019 16:13:17
+
+TIPO 5 Transmitido | 20/09/2019 16:13:24
+
+Time out | 20/09/2019 16:13:24
+

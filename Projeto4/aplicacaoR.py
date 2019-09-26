@@ -11,6 +11,7 @@ print("comecou")
 
 from enlace import *
 import time
+from datetime import datetime
 
 def eop():
     
@@ -57,16 +58,6 @@ def message4(numberPackage):
 
     return package
 
-def message4s(numberPackage):
-    msgType = bytes([7])
-    numberPackageBytes = numberPackage.to_bytes(3, "little")
-    payloadSize = bytes([0])
-    emptyhead = bytes([0x00])*5
-
-    head = msgType +  numberPackageBytes + payloadSize + emptyhead
-    package = head + eop()
-
-    return package
 def message6(numberPackage):
     msgType = bytes([6])
     numberPackageBytes = numberPackage.to_bytes(3, "little")
@@ -88,6 +79,18 @@ def message5():
 
     return package
 
+    
+
+
+def log(mensagem):
+    now = datetime.now()
+    # dd/mm/YY H:M:S
+    dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
+    print(mensagem + " | " + dt_string)
+    with open("server.log", "a") as file:
+        file.write(mensagem + " | " + dt_string + "\n" + "\n")
+        
+
 # Serial Com Port
 #   para saber a sua porta, execute no terminal :
 #   python3 -m serial.tools.list_ports
@@ -104,54 +107,55 @@ def server():
     com.enable()
 
      # Log
-    print("-------------------------")
-    print("Comunicação inicializada")
-    print("  porta : {}".format(com.fisica.name))
-    print("-------------------------")
+    log("-------------------------")
+    log("Comunicação inicializada")
+    log("  porta : {}".format(com.fisica.name))
+    log("-------------------------")
     
     # Faz a recepção dos dados
-    print ("Recebendo dados .... ")
+    log("Recebendo dados .... ")
 
     ocioso = False
     bufferReceived = bytearray()
     while not ocioso:
         head, headSize = com.getData(10,1)
-        print(head)
+       
 
         if headSize != 0:
-            print("Received TYPE1")
+            log("TIPO 1 recebido")
 
             serverNumber = 147
 
             messageNumber = int.from_bytes(head[:1], "little")
-            print ("Numero da mensagem {}".format(messageNumber))
+            log("Numero da mensagem {}".format(messageNumber))
 
             serverNumberR = int.from_bytes(head[1:2], "little")
-            print ("Numero do Servidor {}".format(serverNumberR))
+            log("Numero do Servidor {}".format(serverNumberR))
 
             totalPackage = int.from_bytes(head[2:5], "little")
-            print ("Numero total de pacotes {}".format(totalPackage))
+            log("Numero total de pacotes {}".format(totalPackage))
 
             payloadSize = int.from_bytes(head[5:6], "little")
-            print ("Tamnaho do payload {}".format(payloadSize))
+            log ("Tamnaho do payload {}".format(payloadSize))
+            print(" ")
             
             if serverNumberR == serverNumber:
+                log("Numero do servidor correto")
                 com.sendData(message2())
 
-                print("Sent TYPE2")
+                log("TIPO 2 Transmitido")
 
                 tudo = bytes()
 
                 cont = 1
-                print ("cont {}".format(cont))
                 com.rx.clearBuffer()
                 while cont <= totalPackage:
-                    print("Entrou")
                     recebido = False
                     startTime = time.time()
                     while not recebido:
+                        response = False
                         head, headSize = com.getData(10,2)
-                        print("get data1")
+                        print(" ")
                         if headSize != 0:
                             
 
@@ -162,100 +166,82 @@ def server():
                         
 
                             if msgType == 3:
-                                print("Received TYPE3")
-                                print ("numero do pacote recebido {}".format(numberPackage))
+                                log("TIPO 3 recebido")
+                                log("Numero do pacote recebido: {}".format(numberPackage))
                                 if numberPackage == cont:
-                                    print("Número do pacote esperado")
+                                    log("Número do pacote esperado!!")
+                                    print(" ")
                                     payloadEop, payloadEopSize = com.getData(payloadSize + len(eop()),1)
-                                    print("getdata 2")
+                                    
                                    
 
-                                    if payloadSize != payloadEopSize - len(eop()):
-                                        print("ERRO: Tamanho do payload errado.")
+                                    if payloadSize != payloadEopSize - len(eop()) and not response:
+                                        log("ERRO: Tamanho do payload errado.")
                                         com.sendData(message6(numberPackage))
-                                        print("Sent TYPE6")
+                                        response = True
+                                        log("TIPO 6 Transmitido")
+                                        print(" ")
 
                                     if eop() in payloadEop:
                                         i = payloadEop.find(eop())
-                                        print("EOP na posicão {}".format(i))
+                                        log("EOP na posicão {}".format(i))
                                         payload = payloadEop[:i]
 
                                         leftover = payloadEop[i:]
-                                        if leftover == eop():
-                                            print("EOP está no lugar certo")
-                                            print("Sent TYPE4")
-                                            print(" ")
+                                        if leftover == eop() and not response:
+                                            log("EOP está no lugar certo")
+                                            response = True
+                                            log("TIPO 4 Transmitido")
+                                           
                                             tudo += payload
                                             com.sendData(message4(numberPackage))
                                             cont += 1
                                             recebido = True
                                             
                                             
-                                            print ("Proximo pacote esperado : {}".format(cont))
-                                            print(" ")
+                                            log ("Proximo pacote esperado : {}".format(cont))
+                                            
                                             continue
                                            
                                         else:
-                                            print("ERRO: EOP está no lugar errado")
+                                            log("ERRO: EOP está no lugar errado")
                                             com.sendData(message6(numberPackage))
-                                            print("Sent TYPE6")
+                                            log("TIPO 6 Transmitido")
+                                            response = True
                                     else:
-                                        print("ERRO: EOP não encontrado")
-                                        com.sendData(message6(numberPackage))
-                                        print("Sent TYPE6")
+                                        log("ERRO: EOP não encontrado")
+                                        com.sendData(message6(cont))
+                                        log("TIPO 6 Transmitido")
+                                        response = True
                                 else:
-                                    print("ERRO: Número do pacote diferente do esperado")
-                                    com.sendData(message6(numberPackage))
-                                    print("Sent TYPE6")
-
-                        if time.time() - startTime > 20:
+                                    log("ERRO: Número do pacote diferente do esperado")
+                                    com.sendData(message6(cont))
+                                    log("TIPO 6 Transmitido")
+                                    response = True
+                        
+                        time.sleep(1)
+                        if time.time() - startTime > 20 and not response:
+                            response = True
                             com.sendData(message5())
-                            print("Sent TYPE5")
-                            print("Time out")
+                            log("TIPO 5 Transmitido")
+                            log("Time out")
                             com.disable()
                             exit()
-
-                        if time.time() - startTime > 10:
-                            com.sendData(message4(cont))
-                            print("Sent TYPE44")
-                            print(" ")
-                       
                         
-
                         
-
+                            
                         com.rx.clearBuffer()
 
-                           
-
-                
-                print("saiu")
+                        
                 with open("testeee.jpg", "wb") as img:
                     img.write(tudo)
         
-
+                com.disable()
+                exit()
 
         com.rx.clearBuffer()    
         ocioso = False 
 
-#        # payload = payload.replace(eopReplaced, eop)
-
-        # payloadSize = len(payload)
-
-        # sizeReceived = payloadEopSize - len(eop)
-
-        # if sizeReceived == payloadSize:
-        #     print("Sucesso")
-        #     com.sendData(bytes([0xa3]))
-        #     print ("Transmitido {} bytes ".format(1))
-    
-        # print ("Recebidos {} bytes ".format(headSize + payloadEopSize))
-        # print(" ")
-
-        # if packageNumber == totalPackage:
-        #     with open("testeee.jpg", "wb") as img:
-        #         img.write(bufferReceived)
-        #     # stop = True
 
     # Encerra comunicação
     print("-------------------------")
