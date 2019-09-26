@@ -1,0 +1,428 @@
+------------------------- | 26/09/2019 14:48:11
+
+Comunicação inicializada | 26/09/2019 14:48:11
+
+  porta : /dev/cu.usbmodem144101 | 26/09/2019 14:48:11
+
+------------------------- | 26/09/2019 14:48:11
+
+Gerando dados para transmissao : | 26/09/2019 14:48:11
+
+tentado transmitir .... 13 bytes | 26/09/2019 14:48:11
+
+TIPO 1 Transmitido | 26/09/2019 14:48:11
+
+TIPO 1 Transmitido | 26/09/2019 14:48:12
+
+TIPO 1 Transmitido | 26/09/2019 14:48:13
+
+TIPO 2 recebido | 26/09/2019 14:48:14
+
+Pacote atual: 1 | 26/09/2019 14:48:14
+
+TIPO 3 Transmitido | 26/09/2019 14:48:14
+
+TIPO 4 recebido | 26/09/2019 14:48:14
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:48:14
+
+Pacote atual: 2 | 26/09/2019 14:48:14
+
+TIPO 3 Transmitido | 26/09/2019 14:48:14
+
+TIPO 4 recebido | 26/09/2019 14:48:15
+
+Ultimo pacote recebido: 2 | 26/09/2019 14:48:15
+
+Pacote atual: 3 | 26/09/2019 14:48:15
+
+TIPO 3 Transmitido | 26/09/2019 14:48:15
+
+TIPO 4 recebido | 26/09/2019 14:48:16
+
+Ultimo pacote recebido: 3 | 26/09/2019 14:48:16
+
+Pacote atual: 4 | 26/09/2019 14:48:16
+
+TIPO 3 Transmitido | 26/09/2019 14:48:16
+
+TIPO 4 recebido | 26/09/2019 14:48:17
+
+Ultimo pacote recebido: 4 | 26/09/2019 14:48:17
+
+Pacote atual: 5 | 26/09/2019 14:48:17
+
+TIPO 3 Transmitido | 26/09/2019 14:48:17
+
+TIPO 4 recebido | 26/09/2019 14:48:17
+
+Ultimo pacote recebido: 5 | 26/09/2019 14:48:17
+
+Pacote atual: 6 | 26/09/2019 14:48:17
+
+TIPO 3 Transmitido | 26/09/2019 14:48:17
+
+TIPO 4 recebido | 26/09/2019 14:48:18
+
+Ultimo pacote recebido: 6 | 26/09/2019 14:48:18
+
+Pacote atual: 7 | 26/09/2019 14:48:18
+
+TIPO 3 Transmitido | 26/09/2019 14:48:18
+
+TIPO 4 recebido | 26/09/2019 14:48:18
+
+Ultimo pacote recebido: 7 | 26/09/2019 14:48:18
+
+Pacote atual: 8 | 26/09/2019 14:48:18
+
+TIPO 3 Transmitido | 26/09/2019 14:48:18
+
+TIPO 4 recebido | 26/09/2019 14:48:19
+
+Ultimo pacote recebido: 8 | 26/09/2019 14:48:19
+
+Pacote atual: 9 | 26/09/2019 14:48:19
+
+TIPO 3 Transmitido | 26/09/2019 14:48:19
+
+TIPO 4 recebido | 26/09/2019 14:48:20
+
+Ultimo pacote recebido: 9 | 26/09/2019 14:48:20
+
+Pacote atual: 10 | 26/09/2019 14:48:20
+
+TIPO 3 Transmitido | 26/09/2019 14:48:20
+
+TIPO 4 recebido | 26/09/2019 14:48:21
+
+Ultimo pacote recebido: 10 | 26/09/2019 14:48:21
+
+Pacote atual: 11 | 26/09/2019 14:48:21
+
+TIPO 3 Transmitido | 26/09/2019 14:48:21
+
+TIPO 4 recebido | 26/09/2019 14:48:22
+
+Ultimo pacote recebido: 11 | 26/09/2019 14:48:22
+
+------------------------- | 26/09/2019 14:48:22
+
+Comunicação encerrada | 26/09/2019 14:48:22
+
+------------------------- | 26/09/2019 14:48:22
+
+------------------------- | 26/09/2019 14:49:20
+
+Comunicação inicializada | 26/09/2019 14:49:20
+
+  porta : /dev/cu.usbmodem144101 | 26/09/2019 14:49:20
+
+------------------------- | 26/09/2019 14:49:20
+
+Gerando dados para transmissao : | 26/09/2019 14:49:20
+
+tentado transmitir .... 13 bytes | 26/09/2019 14:49:21
+
+TIPO 1 Transmitido | 26/09/2019 14:49:21
+
+TIPO 1 Transmitido | 26/09/2019 14:49:23
+
+TIPO 2 recebido | 26/09/2019 14:49:23
+
+Pacote atual: 1 | 26/09/2019 14:49:23
+
+TIPO 3 Transmitido | 26/09/2019 14:49:23
+
+TIPO 3 Transmitido | 26/09/2019 14:49:28
+
+TIPO 6 recebido | 26/09/2019 14:49:29
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:29
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:29
+
+Pacote atual: 1 | 26/09/2019 14:49:29
+
+TIPO 3 Transmitido | 26/09/2019 14:49:29
+
+TIPO 6 recebido | 26/09/2019 14:49:30
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:30
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:30
+
+Pacote atual: 1 | 26/09/2019 14:49:30
+
+TIPO 3 Transmitido | 26/09/2019 14:49:30
+
+TIPO 6 recebido | 26/09/2019 14:49:31
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:31
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:31
+
+Pacote atual: 1 | 26/09/2019 14:49:31
+
+TIPO 3 Transmitido | 26/09/2019 14:49:31
+
+TIPO 6 recebido | 26/09/2019 14:49:32
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:32
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:32
+
+Pacote atual: 1 | 26/09/2019 14:49:32
+
+TIPO 3 Transmitido | 26/09/2019 14:49:32
+
+TIPO 6 recebido | 26/09/2019 14:49:32
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:32
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:32
+
+Pacote atual: 1 | 26/09/2019 14:49:32
+
+TIPO 3 Transmitido | 26/09/2019 14:49:32
+
+TIPO 6 recebido | 26/09/2019 14:49:33
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:33
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:33
+
+Pacote atual: 1 | 26/09/2019 14:49:33
+
+TIPO 3 Transmitido | 26/09/2019 14:49:33
+
+TIPO 6 recebido | 26/09/2019 14:49:34
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:34
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:34
+
+Pacote atual: 1 | 26/09/2019 14:49:34
+
+TIPO 3 Transmitido | 26/09/2019 14:49:34
+
+TIPO 6 recebido | 26/09/2019 14:49:35
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:35
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:35
+
+Pacote atual: 1 | 26/09/2019 14:49:35
+
+TIPO 3 Transmitido | 26/09/2019 14:49:35
+
+TIPO 6 recebido | 26/09/2019 14:49:36
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:36
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:36
+
+Pacote atual: 1 | 26/09/2019 14:49:36
+
+TIPO 3 Transmitido | 26/09/2019 14:49:36
+
+TIPO 6 recebido | 26/09/2019 14:49:37
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:37
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:37
+
+Pacote atual: 1 | 26/09/2019 14:49:37
+
+TIPO 3 Transmitido | 26/09/2019 14:49:37
+
+TIPO 6 recebido | 26/09/2019 14:49:38
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:38
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:38
+
+Pacote atual: 1 | 26/09/2019 14:49:38
+
+TIPO 3 Transmitido | 26/09/2019 14:49:38
+
+TIPO 6 recebido | 26/09/2019 14:49:39
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:39
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:39
+
+Pacote atual: 1 | 26/09/2019 14:49:39
+
+TIPO 3 Transmitido | 26/09/2019 14:49:39
+
+TIPO 6 recebido | 26/09/2019 14:49:40
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:40
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:41
+
+Pacote atual: 1 | 26/09/2019 14:49:41
+
+TIPO 3 Transmitido | 26/09/2019 14:49:41
+
+TIPO 6 recebido | 26/09/2019 14:49:42
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:42
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:42
+
+Pacote atual: 1 | 26/09/2019 14:49:42
+
+TIPO 3 Transmitido | 26/09/2019 14:49:42
+
+TIPO 6 recebido | 26/09/2019 14:49:42
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:42
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:42
+
+Pacote atual: 1 | 26/09/2019 14:49:42
+
+TIPO 3 Transmitido | 26/09/2019 14:49:42
+
+TIPO 6 recebido | 26/09/2019 14:49:43
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:43
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:43
+
+Pacote atual: 1 | 26/09/2019 14:49:43
+
+TIPO 3 Transmitido | 26/09/2019 14:49:43
+
+TIPO 6 recebido | 26/09/2019 14:49:44
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:44
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:44
+
+Pacote atual: 1 | 26/09/2019 14:49:44
+
+TIPO 3 Transmitido | 26/09/2019 14:49:44
+
+TIPO 6 recebido | 26/09/2019 14:49:44
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:44
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:44
+
+Pacote atual: 1 | 26/09/2019 14:49:44
+
+TIPO 3 Transmitido | 26/09/2019 14:49:44
+
+TIPO 6 recebido | 26/09/2019 14:49:45
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:45
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:45
+
+Pacote atual: 1 | 26/09/2019 14:49:45
+
+TIPO 3 Transmitido | 26/09/2019 14:49:45
+
+TIPO 6 recebido | 26/09/2019 14:49:46
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:46
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:46
+
+Pacote atual: 1 | 26/09/2019 14:49:46
+
+TIPO 3 Transmitido | 26/09/2019 14:49:46
+
+TIPO 6 recebido | 26/09/2019 14:49:47
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:47
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:47
+
+Pacote atual: 1 | 26/09/2019 14:49:47
+
+TIPO 3 Transmitido | 26/09/2019 14:49:47
+
+TIPO 6 recebido | 26/09/2019 14:49:47
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:47
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:47
+
+Pacote atual: 1 | 26/09/2019 14:49:47
+
+TIPO 3 Transmitido | 26/09/2019 14:49:47
+
+TIPO 6 recebido | 26/09/2019 14:49:48
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:48
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:48
+
+Pacote atual: 1 | 26/09/2019 14:49:48
+
+TIPO 3 Transmitido | 26/09/2019 14:49:48
+
+TIPO 6 recebido | 26/09/2019 14:49:48
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:48
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:48
+
+Pacote atual: 1 | 26/09/2019 14:49:48
+
+TIPO 3 Transmitido | 26/09/2019 14:49:48
+
+TIPO 6 recebido | 26/09/2019 14:49:49
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:50
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:50
+
+Pacote atual: 1 | 26/09/2019 14:49:50
+
+TIPO 3 Transmitido | 26/09/2019 14:49:50
+
+TIPO 6 recebido | 26/09/2019 14:49:51
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:51
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:51
+
+Pacote atual: 1 | 26/09/2019 14:49:51
+
+TIPO 3 Transmitido | 26/09/2019 14:49:51
+
+TIPO 6 recebido | 26/09/2019 14:49:51
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:51
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:51
+
+Pacote atual: 1 | 26/09/2019 14:49:51
+
+TIPO 3 Transmitido | 26/09/2019 14:49:51
+
+TIPO 6 recebido | 26/09/2019 14:49:52
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:52
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:52
+
+Pacote atual: 1 | 26/09/2019 14:49:52
+
+TIPO 3 Transmitido | 26/09/2019 14:49:52
+
+TIPO 6 recebido | 26/09/2019 14:49:53
+
+Ultimo pacote recebido: 1 | 26/09/2019 14:49:54
+
+Reenvinado pacote: 1 | 26/09/2019 14:49:54
+
+Pacote atual: 1 | 26/09/2019 14:49:54
+
+TIPO 3 Transmitido | 26/09/2019 14:49:54
+

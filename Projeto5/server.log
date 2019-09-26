@@ -1,0 +1,442 @@
+------------------------- | 26/09/2019 14:48:06
+
+Comunicação inicializada | 26/09/2019 14:48:06
+
+  porta : /dev/cu.usbmodem144201 | 26/09/2019 14:48:06
+
+------------------------- | 26/09/2019 14:48:06
+
+Recebendo dados ....  | 26/09/2019 14:48:06
+
+TIPO 1 recebido | 26/09/2019 14:48:13
+
+Numero da mensagem 1 | 26/09/2019 14:48:13
+
+Numero do Servidor 147 | 26/09/2019 14:48:13
+
+Numero total de pacotes 11 | 26/09/2019 14:48:13
+
+Tamnaho do payload 1 | 26/09/2019 14:48:13
+
+Numero do servidor correto | 26/09/2019 14:48:13
+
+TIPO 2 Transmitido | 26/09/2019 14:48:13
+
+TIPO 3 recebido | 26/09/2019 14:48:14
+
+Numero do pacote recebido: 1 | 26/09/2019 14:48:14
+
+Número do pacote esperado!! | 26/09/2019 14:48:14
+
+EOP na posicão 128 | 26/09/2019 14:48:14
+
+EOP está no lugar certo | 26/09/2019 14:48:14
+
+TIPO 4 Transmitido | 26/09/2019 14:48:14
+
+Proximo pacote esperado : 2 | 26/09/2019 14:48:14
+
+TIPO 3 recebido | 26/09/2019 14:48:14
+
+Numero do pacote recebido: 2 | 26/09/2019 14:48:14
+
+Número do pacote esperado!! | 26/09/2019 14:48:14
+
+EOP na posicão 128 | 26/09/2019 14:48:14
+
+EOP está no lugar certo | 26/09/2019 14:48:14
+
+TIPO 4 Transmitido | 26/09/2019 14:48:14
+
+Proximo pacote esperado : 3 | 26/09/2019 14:48:14
+
+TIPO 3 recebido | 26/09/2019 14:48:15
+
+Numero do pacote recebido: 3 | 26/09/2019 14:48:15
+
+Número do pacote esperado!! | 26/09/2019 14:48:15
+
+EOP na posicão 128 | 26/09/2019 14:48:15
+
+EOP está no lugar certo | 26/09/2019 14:48:15
+
+TIPO 4 Transmitido | 26/09/2019 14:48:15
+
+Proximo pacote esperado : 4 | 26/09/2019 14:48:15
+
+TIPO 3 recebido | 26/09/2019 14:48:16
+
+Numero do pacote recebido: 4 | 26/09/2019 14:48:16
+
+Número do pacote esperado!! | 26/09/2019 14:48:16
+
+EOP na posicão 128 | 26/09/2019 14:48:16
+
+EOP está no lugar certo | 26/09/2019 14:48:16
+
+TIPO 4 Transmitido | 26/09/2019 14:48:16
+
+Proximo pacote esperado : 5 | 26/09/2019 14:48:16
+
+TIPO 3 recebido | 26/09/2019 14:48:17
+
+Numero do pacote recebido: 5 | 26/09/2019 14:48:17
+
+Número do pacote esperado!! | 26/09/2019 14:48:17
+
+EOP na posicão 128 | 26/09/2019 14:48:17
+
+EOP está no lugar certo | 26/09/2019 14:48:17
+
+TIPO 4 Transmitido | 26/09/2019 14:48:17
+
+Proximo pacote esperado : 6 | 26/09/2019 14:48:17
+
+TIPO 3 recebido | 26/09/2019 14:48:17
+
+Numero do pacote recebido: 6 | 26/09/2019 14:48:17
+
+Número do pacote esperado!! | 26/09/2019 14:48:17
+
+EOP na posicão 128 | 26/09/2019 14:48:17
+
+EOP está no lugar certo | 26/09/2019 14:48:18
+
+TIPO 4 Transmitido | 26/09/2019 14:48:18
+
+Proximo pacote esperado : 7 | 26/09/2019 14:48:18
+
+TIPO 3 recebido | 26/09/2019 14:48:18
+
+Numero do pacote recebido: 7 | 26/09/2019 14:48:18
+
+Número do pacote esperado!! | 26/09/2019 14:48:18
+
+EOP na posicão 128 | 26/09/2019 14:48:18
+
+EOP está no lugar certo | 26/09/2019 14:48:18
+
+TIPO 4 Transmitido | 26/09/2019 14:48:18
+
+Proximo pacote esperado : 8 | 26/09/2019 14:48:18
+
+TIPO 3 recebido | 26/09/2019 14:48:19
+
+Numero do pacote recebido: 8 | 26/09/2019 14:48:19
+
+Número do pacote esperado!! | 26/09/2019 14:48:19
+
+EOP na posicão 128 | 26/09/2019 14:48:19
+
+EOP está no lugar certo | 26/09/2019 14:48:19
+
+TIPO 4 Transmitido | 26/09/2019 14:48:19
+
+Proximo pacote esperado : 9 | 26/09/2019 14:48:19
+
+TIPO 3 recebido | 26/09/2019 14:48:19
+
+Numero do pacote recebido: 9 | 26/09/2019 14:48:19
+
+Número do pacote esperado!! | 26/09/2019 14:48:19
+
+EOP na posicão 128 | 26/09/2019 14:48:20
+
+EOP está no lugar certo | 26/09/2019 14:48:20
+
+TIPO 4 Transmitido | 26/09/2019 14:48:20
+
+Proximo pacote esperado : 10 | 26/09/2019 14:48:20
+
+TIPO 3 recebido | 26/09/2019 14:48:21
+
+Numero do pacote recebido: 10 | 26/09/2019 14:48:21
+
+Número do pacote esperado!! | 26/09/2019 14:48:21
+
+EOP na posicão 128 | 26/09/2019 14:48:21
+
+EOP está no lugar certo | 26/09/2019 14:48:21
+
+TIPO 4 Transmitido | 26/09/2019 14:48:21
+
+Proximo pacote esperado : 11 | 26/09/2019 14:48:21
+
+TIPO 3 recebido | 26/09/2019 14:48:21
+
+Numero do pacote recebido: 11 | 26/09/2019 14:48:21
+
+Número do pacote esperado!! | 26/09/2019 14:48:21
+
+EOP na posicão 127 | 26/09/2019 14:48:21
+
+EOP está no lugar certo | 26/09/2019 14:48:21
+
+TIPO 4 Transmitido | 26/09/2019 14:48:21
+
+Proximo pacote esperado : 12 | 26/09/2019 14:48:21
+
+------------------------- | 26/09/2019 14:49:14
+
+Comunicação inicializada | 26/09/2019 14:49:14
+
+  porta : /dev/cu.usbmodem144201 | 26/09/2019 14:49:14
+
+------------------------- | 26/09/2019 14:49:14
+
+Recebendo dados ....  | 26/09/2019 14:49:14
+
+TIPO 1 recebido | 26/09/2019 14:49:21
+
+Numero da mensagem 1 | 26/09/2019 14:49:21
+
+Numero do Servidor 147 | 26/09/2019 14:49:21
+
+Numero total de pacotes 11 | 26/09/2019 14:49:21
+
+Tamnaho do payload 1 | 26/09/2019 14:49:21
+
+Numero do servidor correto | 26/09/2019 14:49:21
+
+TIPO 2 Transmitido | 26/09/2019 14:49:21
+
+TIPO 3 recebido | 26/09/2019 14:49:28
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:28
+
+Número do pacote esperado!! | 26/09/2019 14:49:28
+
+EOP na posicão 128 | 26/09/2019 14:49:28
+
+TIPO 3 recebido | 26/09/2019 14:49:29
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:29
+
+Número do pacote esperado!! | 26/09/2019 14:49:29
+
+EOP na posicão 128 | 26/09/2019 14:49:29
+
+TIPO 3 recebido | 26/09/2019 14:49:30
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:30
+
+Número do pacote esperado!! | 26/09/2019 14:49:30
+
+EOP na posicão 128 | 26/09/2019 14:49:30
+
+TIPO 3 recebido | 26/09/2019 14:49:31
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:31
+
+Número do pacote esperado!! | 26/09/2019 14:49:31
+
+EOP na posicão 128 | 26/09/2019 14:49:32
+
+TIPO 3 recebido | 26/09/2019 14:49:32
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:32
+
+Número do pacote esperado!! | 26/09/2019 14:49:32
+
+EOP na posicão 128 | 26/09/2019 14:49:32
+
+TIPO 3 recebido | 26/09/2019 14:49:33
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:33
+
+Número do pacote esperado!! | 26/09/2019 14:49:33
+
+EOP na posicão 128 | 26/09/2019 14:49:33
+
+TIPO 3 recebido | 26/09/2019 14:49:33
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:33
+
+Número do pacote esperado!! | 26/09/2019 14:49:33
+
+EOP na posicão 128 | 26/09/2019 14:49:33
+
+TIPO 3 recebido | 26/09/2019 14:49:34
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:34
+
+Número do pacote esperado!! | 26/09/2019 14:49:34
+
+EOP na posicão 128 | 26/09/2019 14:49:34
+
+TIPO 3 recebido | 26/09/2019 14:49:35
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:35
+
+Número do pacote esperado!! | 26/09/2019 14:49:35
+
+EOP na posicão 128 | 26/09/2019 14:49:35
+
+TIPO 3 recebido | 26/09/2019 14:49:36
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:36
+
+Número do pacote esperado!! | 26/09/2019 14:49:37
+
+EOP na posicão 128 | 26/09/2019 14:49:37
+
+TIPO 3 recebido | 26/09/2019 14:49:38
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:38
+
+Número do pacote esperado!! | 26/09/2019 14:49:38
+
+EOP na posicão 128 | 26/09/2019 14:49:38
+
+TIPO 3 recebido | 26/09/2019 14:49:39
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:39
+
+Número do pacote esperado!! | 26/09/2019 14:49:39
+
+EOP na posicão 128 | 26/09/2019 14:49:39
+
+TIPO 3 recebido | 26/09/2019 14:49:40
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:40
+
+Número do pacote esperado!! | 26/09/2019 14:49:40
+
+EOP na posicão 128 | 26/09/2019 14:49:40
+
+TIPO 3 recebido | 26/09/2019 14:49:41
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:41
+
+Número do pacote esperado!! | 26/09/2019 14:49:41
+
+EOP na posicão 128 | 26/09/2019 14:49:41
+
+TIPO 3 recebido | 26/09/2019 14:49:42
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:42
+
+Número do pacote esperado!! | 26/09/2019 14:49:42
+
+EOP na posicão 128 | 26/09/2019 14:49:42
+
+TIPO 3 recebido | 26/09/2019 14:49:42
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:42
+
+Número do pacote esperado!! | 26/09/2019 14:49:43
+
+EOP na posicão 128 | 26/09/2019 14:49:43
+
+TIPO 3 recebido | 26/09/2019 14:49:43
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:43
+
+Número do pacote esperado!! | 26/09/2019 14:49:43
+
+EOP na posicão 128 | 26/09/2019 14:49:43
+
+TIPO 3 recebido | 26/09/2019 14:49:44
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:44
+
+Número do pacote esperado!! | 26/09/2019 14:49:44
+
+EOP na posicão 128 | 26/09/2019 14:49:44
+
+TIPO 3 recebido | 26/09/2019 14:49:44
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:44
+
+Número do pacote esperado!! | 26/09/2019 14:49:44
+
+EOP na posicão 128 | 26/09/2019 14:49:45
+
+TIPO 3 recebido | 26/09/2019 14:49:46
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:46
+
+Número do pacote esperado!! | 26/09/2019 14:49:46
+
+EOP na posicão 128 | 26/09/2019 14:49:46
+
+TIPO 3 recebido | 26/09/2019 14:49:46
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:46
+
+Número do pacote esperado!! | 26/09/2019 14:49:46
+
+EOP na posicão 128 | 26/09/2019 14:49:46
+
+TIPO 3 recebido | 26/09/2019 14:49:47
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:47
+
+Número do pacote esperado!! | 26/09/2019 14:49:47
+
+EOP na posicão 128 | 26/09/2019 14:49:47
+
+TIPO 3 recebido | 26/09/2019 14:49:48
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:48
+
+Número do pacote esperado!! | 26/09/2019 14:49:48
+
+EOP na posicão 128 | 26/09/2019 14:49:48
+
+TIPO 3 recebido | 26/09/2019 14:49:48
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:48
+
+Número do pacote esperado!! | 26/09/2019 14:49:48
+
+EOP na posicão 128 | 26/09/2019 14:49:48
+
+TIPO 3 recebido | 26/09/2019 14:49:49
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:49
+
+Número do pacote esperado!! | 26/09/2019 14:49:49
+
+EOP na posicão 128 | 26/09/2019 14:49:49
+
+TIPO 3 recebido | 26/09/2019 14:49:50
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:50
+
+Número do pacote esperado!! | 26/09/2019 14:49:50
+
+EOP na posicão 128 | 26/09/2019 14:49:50
+
+TIPO 3 recebido | 26/09/2019 14:49:51
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:51
+
+Número do pacote esperado!! | 26/09/2019 14:49:51
+
+EOP na posicão 128 | 26/09/2019 14:49:51
+
+TIPO 3 recebido | 26/09/2019 14:49:52
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:52
+
+Número do pacote esperado!! | 26/09/2019 14:49:52
+
+EOP na posicão 128 | 26/09/2019 14:49:52
+
+TIPO 3 recebido | 26/09/2019 14:49:53
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:53
+
+Número do pacote esperado!! | 26/09/2019 14:49:53
+
+EOP na posicão 128 | 26/09/2019 14:49:53
+
+TIPO 3 recebido | 26/09/2019 14:49:54
+
+Numero do pacote recebido: 1 | 26/09/2019 14:49:54
+
+Número do pacote esperado!! | 26/09/2019 14:49:54
+
+EOP na posicão 128 | 26/09/2019 14:49:54
+
